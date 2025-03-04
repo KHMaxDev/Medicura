@@ -176,7 +176,7 @@
     </nav>
 
     <section class="hero-section">
-        <h1>Bienvenido a Mediocura</h1>
+        <h1>Bienvenido a Medicura</h1>
         <p>Mejoramos tu salud con innovación y cuidado</p>
         <a href="" class="btn">Regístrate Ahora</a>
     </section>
