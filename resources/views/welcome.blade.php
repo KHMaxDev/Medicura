@@ -199,10 +199,10 @@
             <?php
             $equipo = [
                 ["nombre" => "Pedro Dzul", "rol" => "Líder", "imagen" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYVYxhM7Gr3AGVnVwMxuzNF3SP9dLhw2Pf3g&s"],
-                ["nombre" => "Angel", "rol" => "Líder", "imagen" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJOUqH_zWYTlVMdVJ7ZE2xrY1PVgZFSySJiQ&s"],
-                ["nombre" => "Steven", "rol" => "Líder", "imagen" => "https://antipode-peru.com/info/c-est-quoi-un-gringo--1.jpeg"],
+                ["nombre" => "Angel", "rol" => "Diseño web", "imagen" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJOUqH_zWYTlVMdVJ7ZE2xrY1PVgZFSySJiQ&s"],
+                ["nombre" => "Steven", "rol" => "Diseño web", "imagen" => "https://antipode-peru.com/info/c-est-quoi-un-gringo--1.jpeg"],
                 ["nombre" => "Madox", "rol" => "Líder", "imagen" => "https://i.pinimg.com/280x280_RS/f5/fa/1e/f5fa1e1989495b2ce6b32fba901981e6.jpg"],
-                ["nombre" => "Anderson", "rol" => "Líder", "imagen" => "https://cdn.proboxtv.com/uploads/canelo_alvarez_ac939468f5.jpg"],
+                ["nombre" => "Anderson", "rol" => "Administrador BD", "imagen" => "https://cdn.proboxtv.com/uploads/canelo_alvarez_ac939468f5.jpg"],
                 ["nombre" => "Salvador", "rol" => "Líder", "imagen" => "https://phantom-marca-mx.unidadeditorial.es/8b0fabe7b7e710222127b342ffe35a67/resize/828/f/jpg/mx/assets/multimedia/imagenes/2023/02/20/16769270250490.jpg"],
             ];
 
