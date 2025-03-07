@@ -23,7 +23,7 @@
   <ul class="nav">
     <!--Página de inicio-->
     <li class="nav-item">
-      <a class="nav-link" href="/proyecto_medicura/medicurav4/admin/index.php">
+      <a class="nav-link" href="{{ url('admin') }}">
         <i class="icon-grid menu-icon"></i>
         <span class="menu-title">Inicio</span>
       </a>
@@ -66,7 +66,7 @@
       </a>
       <div class="collapse" id="auth">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="/proyecto_medicura/medicurav4/admin/instituciones.php"> Instituciones</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/instituciones') }}"> Instituciones</a></li>
           <li class="nav-item"> <a class="nav-link" href="/proyecto_medicura/medicurav4/admin/medicamentos.php"> Médicamentos </a></li>
         </ul>
       </div>
