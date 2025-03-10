@@ -6,23 +6,24 @@ use Illuminate\Http\Request;
 
 class institucionesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
+        //Devuelve todas las instituciones, solicito para mostrar en una tabla
         $instituciones = Institucion::all();
+        //Retorna la vista
         return view ('admin-views.instituciones.instituciones-admin', compact('instituciones'));
     }
     public function create(){
+        //Retorna una vista asignada para realizar las creaciones
         return view('admin-views.instituciones.instituciones-admin-create');
     }
-    /**
-     * Store a newly created resource in storage.
-     */
+
     // Guardar una nueva institución
     public function store(Request $request)
     {
+        //Hace la petición y envío de los parámetros que asigné en el modelo o como lo estructuré
+        //Defino su tipo y si es requerido ese campo
         $request->validate([
             'nombre' => 'required|string|max:255',
             'direccion.estado' => 'required|string',
@@ -34,37 +35,38 @@ class institucionesController extends Controller
             'direccion.numero' => 'required|string',
         ]);
 
+        //Hace el envió de la petición con los datos, y finalmente me redirecciona a la vista principal
         $institucion = new Institucion($request->all());
         $institucion->save();   
         return redirect()->route('instituciones-admin')->with('success', 'Institución creada exitosamente.');
     }
-    /**
-     * Display the specified resource.
-     */
+
+    //Vista para mostrar un solo registro de acuerdo a la id
     public function show(string $id)
     {
         $institucion = Institucion::find($id);
         return view('admin-views.instituciones.instituciones-admin-view', compact('institucion'));
     }
 
+    //De acuerdo al ID manda una vista
     public function edit($id){
         $institucion = Institucion::find($id);
         return view('admin-views.instituciones.instituciones-admin-edit', compact('institucion'));
     }
-    /**
-     * Update the specified resource in storage.
-     */
+
+
+    //Actualizar una institución
     public function update(Request $request, string $id)
     {
         // Buscar la institución
         $institucion = Institucion::find($id);
         
-        // Verificar si existe
+        // Verifica si existe
         if (!$institucion) {
             return redirect()->back()->with('error', 'Institución no encontrada.');
         }
     
-        // Validar los datos del formulario
+        // Valida los datos del formulario
         $request->validate([
             'nombre' => 'required|string|max:255',
             'direccion.estado' => 'required|string|max:255',
@@ -76,7 +78,7 @@ class institucionesController extends Controller
             'direccion.numero' => 'required|string|max:20',
         ]);
     
-        // Actualizar datos
+        // Actualiza datos
         $institucion->nombre = $request->nombre;
         $institucion->direccion = [
             'estado' => $request->direccion['estado'],
@@ -89,7 +91,7 @@ class institucionesController extends Controller
         ];
         $institucion->updated_at = now();
     
-        // Guardar cambios y verificar si se guardaron correctamente
+        // Guarda los cambios y verifica si se guardaron correctamente
         if ($institucion->save()) {
             return redirect()->route('instituciones-admin')->with('success', 'Institución actualizada con éxito.');
         } else {
@@ -97,17 +99,17 @@ class institucionesController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    //Elimina un registro de acuerdo al ID
     public function destroy(string $id)
     {
         $institucion = Institucion::find($id);
         
+
         if (!$institucion) {
             return redirect()->back()->with('error', 'Institución no encontrada');
         }
-    
+        
+        //Al realizar la eliminación, devuelve nuevamente la página principal (hace un refresh)
         $institucion->delete();
         return redirect()->route('instituciones-admin')->with('success', 'Institución eliminada con éxito');
     }

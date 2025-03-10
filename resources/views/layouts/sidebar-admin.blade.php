@@ -38,7 +38,7 @@
       <div class="collapse" id="ui-basic">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" href="/proyecto_medicura/MedicuraV4/admin/medicos.php">Médicos</a></li>
-          <li class="nav-item"> <a class="nav-link" href="/proyecto_medicura/MedicuraV4/admin/pacientes.php">Pacientes</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/paciente') }}">Pacientes</a></li>
           <li class="nav-item"> <a class="nav-link" href="/proyecto_medicura/MedicuraV4/admin/cuidadores.php">Cuidadores</a></li>
         </ul>
       </div>

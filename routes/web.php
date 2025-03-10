@@ -1,8 +1,11 @@
 <?php
-
+use App\Http\Controllers\Api\ApiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin;
 use App\Http\Controllers\institucionesController;
+use App\Http\Controllers\pacienteController;
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,3 +27,14 @@ Route::delete('/admin/instituciones/{id}', [InstitucionesController::class, 'des
 Route::get('/admin/instituciones/editar/{id}', [institucionesController::class, 'edit'])->name('instituciones-admin-edit');
 Route::patch('/admin/instituciones/editar/{id}', [institucionesController::class, 'update'])->name('instituciones-admin-update');
 Route::get('/admin/instituciones/visualizar/{id}', [institucionesController::class, 'show'])->name('instituciones-admin-visualizar');
+
+//API Instituciones
+Route::apiResource('instituciones', ApiController::class);
+Route::get('/api/instituciones', [ApiController::class, 'index']);
+Route::get('/api/instituciones/{id}', [ApiController::class, 'show']);
+Route::patch('/api/instituciones/{id}', [ApiController::class, 'update']);
+Route::post('/api/instituciones', [ApiController::class, 'store']);
+Route::delete('/api/instituciones/{id}', [ApiController::class, 'destroy']);
+//Paciente
+Route::resource('paciente', pacienteController::class);
+Route::get('/admin/paciente', [pacienteController::class, 'index'])->name('paciente-admin');
