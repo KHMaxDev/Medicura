@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin;
 use App\Http\Controllers\institucionesController;
 use App\Http\Controllers\pacienteController;
+use App\Http\Controllers\CitaController;
+use App\Http\Controllers\Api\CitaController as ApiCitaController;
 
 
 
@@ -38,3 +40,21 @@ Route::delete('/api/instituciones/{id}', [ApiController::class, 'destroy']);
 //Paciente
 Route::resource('paciente', pacienteController::class);
 Route::get('/admin/paciente', [pacienteController::class, 'index'])->name('paciente-admin');
+
+// Citas routes
+Route::resource('citas', CitaController::class);
+Route::get('/admin/citas', [CitaController::class, 'index'])->name('citas-admin');
+Route::get('/admin/citas/crear', [CitaController::class, 'create'])->name('citas-admin-crear');
+Route::post('/admin/citas/crear', [CitaController::class, 'store']);
+Route::delete('/admin/citas/{id}', [CitaController::class, 'destroy'])->name('citas-admin-delete');
+Route::get('/admin/citas/editar/{id}', [CitaController::class, 'edit'])->name('citas-admin-edit');
+Route::patch('/admin/citas/editar/{id}', [CitaController::class, 'update'])->name('citas-admin-update');
+Route::get('/admin/citas/view/{id}', [CitaController::class, 'show'])->name('citas-admin-view');
+
+//API Citas
+Route::apiResource('citas', ApiCitaController::class);
+Route::get('/api/citas', [ApiCitaController::class, 'index']);
+Route::get('/api/citas/{id}', [ApiCitaController::class, 'show']);
+Route::patch('/api/citas/{id}', [ApiCitaController::class, 'update']);
+Route::post('/api/citas', [ApiCitaController::class, 'store']);
+Route::delete('/api/citas/{id}', [ApiCitaController::class, 'destroy']);
