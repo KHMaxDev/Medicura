@@ -3,7 +3,7 @@
 <div class="main-panel" style="margin-top:1.5%">
 <h3 class="m-0 font-weight-bold text-primary">Instituciones registradas</h3>
 <br>
-  <a href="{{ route('instituciones.create') }}" class="btn btn-success mt-4">Crear Nueva Institución</a> 
+  <a href="{{ route('instituciones.create') }}" class="btn btn-success mt-4">Ingresar nueva institución</a> 
         <div class="content-wrapper">
           <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -37,13 +37,12 @@
                                 <td>{{ $institucion->nombre }}</td>
                                 <td>
                                   <!-- Mostrar los campos individuales de la dirección -->
-                                    {{ $institucion->direccion['estado'] }},
-                                    {{ $institucion->direccion['municipio'] }},
-                                    {{ $institucion->direccion['ciudad'] }},
                                     {{ $institucion->direccion['colonia'] }},
                                     {{ $institucion->direccion['codigo_postal'] }},
-                                    {{ $institucion->direccion['calle'] }},
-                                    {{ $institucion->direccion['numero'] }}
+                                    {{ $institucion->direccion['calle'] }}
+                                    #{{ $institucion->direccion['numero'] }},
+                                    {{ $institucion->direccion['ciudad'] }},
+                                    {{ $institucion->direccion['estado'] }},
                                 </td>
                                 <td>{{ $institucion->updated_at }}</td>
                                 <td>

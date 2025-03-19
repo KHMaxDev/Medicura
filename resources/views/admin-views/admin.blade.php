@@ -45,7 +45,7 @@
                   <div class="card card-dark-blue">
                     <div class="card-body">
                       <p class="mb-4">Instituciones</p>
-                      <p class="fs-30 mb-2"><?php// echo $cantidad2?></p>
+                      <p class="fs-30 mb-2">{{ $institucionCount }}</p>
                       <p>Instituciones aliadas</p>
                     </div>
                   </div>
