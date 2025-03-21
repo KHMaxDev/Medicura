@@ -6,7 +6,7 @@ use App\Http\Controllers\institucionesController;
 use App\Http\Controllers\pacienteController;
 use App\Http\Controllers\CitaController;
 use App\Http\Controllers\Api\CitaController as ApiCitaController;
-
+use App\Http\Controllers\reportesController;
 
 
 Route::get('/', function () {
@@ -31,12 +31,12 @@ Route::patch('/admin/instituciones/editar/{id}', [institucionesController::class
 Route::get('/admin/instituciones/visualizar/{id}', [institucionesController::class, 'show'])->name('instituciones-admin-visualizar');
 
 //API Instituciones
-Route::apiResource('instituciones', ApiController::class);
-Route::get('/api/instituciones', [ApiController::class, 'index']);
-Route::get('/api/instituciones/{id}', [ApiController::class, 'show']);
-Route::patch('/api/instituciones/{id}', [ApiController::class, 'update']);
-Route::post('/api/instituciones', [ApiController::class, 'store']);
-Route::delete('/api/instituciones/{id}', [ApiController::class, 'destroy']);
+//Route::apiResource('instituciones', ApiController::class);
+//Route::get('/api/instituciones', [ApiController::class, 'index']);
+//Route::get('/api/instituciones/{id}', [ApiController::class, 'show']);
+//Route::patch('/api/instituciones/{id}', [ApiController::class, 'update']);
+//Route::post('/api/instituciones', [ApiController::class, 'store']);
+//Route::delete('/api/instituciones/{id}', [ApiController::class, 'destroy']);
 //Paciente
 Route::resource('paciente', pacienteController::class);
 Route::get('/admin/paciente', [pacienteController::class, 'index'])->name('paciente-admin');
@@ -58,3 +58,5 @@ Route::get('/api/citas/{id}', [ApiCitaController::class, 'show']);
 Route::patch('/api/citas/{id}', [ApiCitaController::class, 'update']);
 Route::post('/api/citas', [ApiCitaController::class, 'store']);
 Route::delete('/api/citas/{id}', [ApiCitaController::class, 'destroy']);
+
+Route::resource('/reportes', reportesController::class);

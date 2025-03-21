@@ -18,14 +18,14 @@ class CitaController extends Controller
             return $cita;
         });
 
-        return view('admin-views.citas.citas-admin', compact('citas'));
+        return view('doctor-views.citas.citas-doctor', compact('citas'));
     }
 
     public function create()
     {
         $doctores = Doctor::all();
         $pacientes = Paciente::all();
-        return view('admin-views.citas.citas-admin-create', compact('doctores', 'pacientes'));
+        return view('doctor-views.citas.citas-doctor-create', compact('doctores', 'pacientes'));
     }
 
     public function show(string $id)
@@ -33,7 +33,7 @@ class CitaController extends Controller
         $cita = Cita::findOrFail($id);
         $cita->doctor_nombre = Doctor::where('_id', new ObjectId($cita->id_doctor))->value('nombre') ?? 'Unknown';
         $cita->paciente_nombre = Paciente::where('_id', new ObjectId($cita->id_paciente))->value('nombre') ?? 'Unknown';
-        return view('admin-views.citas.citas-admin-view', compact('cita'));
+        return view('doctor-views.citas.citas-doctor-view', compact('cita'));
     }
 
     public function store(Request $request)
@@ -68,7 +68,7 @@ class CitaController extends Controller
                 'acciones' => $acciones,
             ]);
 
-            return redirect()->route('citas-admin')->with('success', 'Cita creada');
+            return redirect()->route('citas-doctor')->with('success', 'Cita creada');
         } catch (\Exception $e) {
             return back()->with('error', 'Error: ' . $e->getMessage());
         }
@@ -79,7 +79,7 @@ class CitaController extends Controller
         $cita = Cita::findOrFail($id);
         $doctores = Doctor::all();
         $pacientes = Paciente::all();
-        return view('admin-views.citas.citas-admin-edit', compact('cita', 'doctores', 'pacientes'));
+        return view('doctor-views.citas.citas-doctor-edit', compact('cita', 'doctores', 'pacientes'));
     }
 
     public function update(Request $request, string $id)
@@ -114,13 +114,13 @@ class CitaController extends Controller
             'acciones' => $acciones,
         ]);
 
-        return redirect()->route('citas-admin')->with('success', 'Cita actualizada');
+        return redirect()->route('citas-doctor')->with('success', 'Cita actualizada');
     }
 
     public function destroy(string $id)
     {
         $cita = Cita::findOrFail($id);
         $cita->delete();
-        return redirect()->route('citas-admin')->with('success', 'Cita eliminada');
+        return redirect()->route('citas-doctor')->with('success', 'Cita eliminada');
     }
 }
