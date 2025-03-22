@@ -4,16 +4,37 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin;
 use App\Http\Controllers\institucionesController;
 use App\Http\Controllers\pacienteController;
+use App\Http\Controllers\usuarioController;
+use App\Models\Usuario;
+
+
+
+/* 
+Route::get('/', function () {
+  return view('admin-views.usuarios.index');
+}); */
+
+
+//Route::get('/', function () {
+  //$usuarios = Usuario::all(['nombre', 'email', 'curp', '_id']);
+  //return view('admin-views.usuarios.index', compact('usuarios'));
+//});
+
+
+
 
 
 
 Route::get('/', function () {
-    return view('welcome');
+ return view('welcome');
 });
 
+
+
 Route::get('/login',function(){
-    return view('login.login');
+  return view('login.login');
 });
+
 
 //admin index
 Route::get('/admin', [admin::class, 'index'])->name('admin');
@@ -35,6 +56,40 @@ Route::get('/api/instituciones/{id}', [ApiController::class, 'show']);
 Route::patch('/api/instituciones/{id}', [ApiController::class, 'update']);
 Route::post('/api/instituciones', [ApiController::class, 'store']);
 Route::delete('/api/instituciones/{id}', [ApiController::class, 'destroy']);
+
 //Paciente
 Route::resource('paciente', pacienteController::class);
 Route::get('/admin/paciente', [pacienteController::class, 'index'])->name('paciente-admin');
+
+
+
+//Usuario-paciente
+Route::resource('usuario', usuarioController::class);
+Route::get('/admin/usuarios', [usuarioController::class, 'index'])->name('usuarios.index');
+Route::get('/admin/usuarios/crear', [usuarioController::class, 'create'])->name('usuarios.crear');
+Route::post('/admin/usuarios/crear', [usuarioController::class, 'store'])->name('usuarios.store');
+Route::delete('/admin/usuarios/{id}', [usuarioController::class, 'destroy'])->name('usuarios.delete');
+Route::get('/admin/usuarios/editar/{id}', [usuarioController::class, 'edit'])->name('usuarios.edit');
+Route::patch('/admin/usuarios/editar/{id}', [usuarioController::class, 'update'])->name('usuarios.update');
+Route::get('/admin/usuarios/visualizar/{id}', [usuarioController::class, 'show'])->name('usuarios.show');
+
+//API Usuario-paciente 
+Route::apiResource('usuario', ApiController::class);
+Route::get('/api/usuarios', [ApiController::class, 'index']);
+Route::get('/api/usuarios/{id}', [ApiController::class, 'show']);
+Route::patch('/api/usuarios/{id}', [ApiController::class, 'update']);
+Route::post('/api/usuarios', [ApiController::class, 'store']);
+Route::delete('/api/usuarios/{id}', [ApiController::class, 'destroy']);
+
+// usuarios-paciente
+Route::put('admin/usuarios/editar/{id}', [UsuarioController::class, 'update']);
+
+Route::get('/admin/usuarios/crear', [usuarioController::class, 'create'])->name('usuarios.create');
+
+Route::get('/admin/usuarios/{id}', [usuarioController::class, 'show'])->name('usuarios.show');
+
+Route::get('/admin/usuarios/destroy/{id}', action: [usuarioController::class, 'destroy'])->name('usuarios.destroy');
+
+Route::delete('admin/usuarios/destroy/{id}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');
+
+Route::get('/admin/usuarios/editar/{id}', [usuarioController::class, 'edit'])->name('usuarios.edit');
