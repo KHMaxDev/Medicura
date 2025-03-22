@@ -111,7 +111,7 @@ return [
             // 'encrypt' => env('DB_ENCRYPT', 'yes'),
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
-        'default' => env('DB_CONNECTION', 'mongodb'),
+     //   'default' => env('DB_CONNECTION', 'mongodb'),
 
  'mongodb' => [
             'driver'   => 'mongodb',
