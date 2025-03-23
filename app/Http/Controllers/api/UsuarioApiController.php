@@ -58,3 +58,4 @@ class UsuarioApiController extends Controller
         return response()->json(['message' => 'Usuario eliminado correctamente'], 204);
     }
 }
+

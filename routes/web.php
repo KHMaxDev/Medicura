@@ -27,6 +27,7 @@ use App\Http\Controllers\Api\CitaController as ApiCitaController;
 
 
 
+
 Route::get('/', function () {
  return view('welcome');
 });
