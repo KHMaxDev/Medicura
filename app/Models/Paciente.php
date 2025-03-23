@@ -3,23 +3,23 @@
 namespace App\Models;
 
 use MongoDB\Laravel\Eloquent\Model;
+use Laravel\Sanctum\HasApiTokens;
 
 class Paciente extends Model
 {
-    protected $collection = 'users'; // Nombre de la colección en MongoDB
+    use HasApiTokens; // <-- Agregar este trait
 
-    protected $fillable = [
-        'nombre',
-        'direccion', // Se permite la asignación masiva como array
-        'created_at',
-        'updated_at'
-    ];
+    protected $collection = 'usuarios';
+    protected $fillable = ['nombre', 'email', 'curp', 'contrasena']; // Agregar contrasena
+    protected $primaryKey = '_id';
+    public $timestamps = false;
 
     protected $casts = [
-        'direccion' => 'array', // Para asegurar que se maneje como un array en PHP
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
+        '_id' => 'string'
     ];
 
-    public $timestamps = true; // Permite que Laravel maneje automáticamente created_at y updated_at
+    public function validatePassword($password)
+    {
+        return $this->contrasena === $password; // Adaptar según tu método de hash
+    }
 }
