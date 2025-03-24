@@ -4,34 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin;
 use App\Http\Controllers\institucionesController;
 use App\Http\Controllers\pacienteController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\usuarioController;
 use App\Models\Usuario;
-
-
-
-/* 
-Route::get('/', function () {
-  return view('admin-views.usuarios.index');
-}); */
-
-
-//Route::get('/', function () {
-  //$usuarios = Usuario::all(['nombre', 'email', 'curp', '_id']);
-  //return view('admin-views.usuarios.index', compact('usuarios'));
-//});
-
-
-
 use App\Http\Controllers\CitaController;
 use App\Http\Controllers\Api\CitaController as ApiCitaController;
-
 use App\Http\Controllers\reportesController;
-
 use App\Http\Controllers\MedicamentosController;
 use App\Http\Controllers\Api\ApiMedicamentosController;
-
-
-
 
 Route::get('/', function () {
  return view('welcome');
@@ -39,12 +19,18 @@ Route::get('/', function () {
 
 
 
-Route::get('/login',function(){
-  return view('login.login');
-});
+
+//Auth
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+//Auth para admin
+
+Route::middleware(['auth', 'admin'])->group(function () {
 
 
-//admin index
+
 Route::get('/admin', [admin::class, 'index'])->name('admin');
 
 //Instituciones
@@ -57,17 +43,17 @@ Route::get('/admin/instituciones/editar/{id}', [institucionesController::class, 
 Route::patch('/admin/instituciones/editar/{id}', [institucionesController::class, 'update'])->name('instituciones-admin-update');
 Route::get('/admin/instituciones/visualizar/{id}', [institucionesController::class, 'show'])->name('instituciones-admin-visualizar');
 
-Route::apiResource('instituciones', ApiController::class);
-Route::get('/api/instituciones', [ApiController::class, 'index']);
-Route::get('/api/instituciones/{id}', [ApiController::class, 'show']);
-Route::patch('/api/instituciones/{id}', [ApiController::class, 'update']);
-Route::post('/api/instituciones', [ApiController::class, 'store']);
-Route::delete('/api/instituciones/{id}', [ApiController::class, 'destroy']);
 //Paciente
 Route::resource('paciente', pacienteController::class);
 Route::get('/admin/paciente', [pacienteController::class, 'index'])->name('paciente-admin');
+});
 
-
+//Auth para doctor
+/* 
+Route::middleware(['auth', 'doctor'])->group(function () {
+    Route::get('/doctor', [DoctorController::class, 'index'])->name('doctor.dashboard');
+});
+*/
 
 //Usuario-paciente
 Route::resource('usuario', usuarioController::class);
