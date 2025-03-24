@@ -67,7 +67,8 @@
       <div class="collapse" id="auth">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/instituciones') }}"> Instituciones</a></li>
-          <li class="nav-item"> <a class="nav-link" href="/proyecto_medicura/medicurav4/admin/medicamentos.php"> Médicamentos </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/medicamentos') }}"> Médicamentos </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/citas') }}"> Citas </a></li>
         </ul>
       </div>
     </li>

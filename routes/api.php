@@ -10,3 +10,9 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::apiResource('reportes', ReportesControllerAPI::class);
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\UsuarioApiController;
+
+Route::apiResource('usuarios', UsuarioApiController::class);
+
