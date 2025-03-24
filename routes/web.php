@@ -25,6 +25,11 @@ Route::get('/', function () {
 use App\Http\Controllers\CitaController;
 use App\Http\Controllers\Api\CitaController as ApiCitaController;
 
+use App\Http\Controllers\reportesController;
+
+use App\Http\Controllers\MedicamentosController;
+use App\Http\Controllers\Api\ApiMedicamentosController;
+
 
 
 
@@ -52,14 +57,12 @@ Route::get('/admin/instituciones/editar/{id}', [institucionesController::class, 
 Route::patch('/admin/instituciones/editar/{id}', [institucionesController::class, 'update'])->name('instituciones-admin-update');
 Route::get('/admin/instituciones/visualizar/{id}', [institucionesController::class, 'show'])->name('instituciones-admin-visualizar');
 
-//API Instituciones
 Route::apiResource('instituciones', ApiController::class);
 Route::get('/api/instituciones', [ApiController::class, 'index']);
 Route::get('/api/instituciones/{id}', [ApiController::class, 'show']);
 Route::patch('/api/instituciones/{id}', [ApiController::class, 'update']);
 Route::post('/api/instituciones', [ApiController::class, 'store']);
 Route::delete('/api/instituciones/{id}', [ApiController::class, 'destroy']);
-
 //Paciente
 Route::resource('paciente', pacienteController::class);
 Route::get('/admin/paciente', [pacienteController::class, 'index'])->name('paciente-admin');
@@ -114,3 +117,25 @@ Route::get('/api/citas/{id}', [ApiCitaController::class, 'show']);
 Route::patch('/api/citas/{id}', [ApiCitaController::class, 'update']);
 Route::post('/api/citas', [ApiCitaController::class, 'store']);
 Route::delete('/api/citas/{id}', [ApiCitaController::class, 'destroy']);
+
+
+Route::resource('/reportes', reportesController::class);
+
+// Medicamentos web routes
+Route::resource('medicamentos', MedicamentosController::class);
+Route::get('/admin/medicamentos', [MedicamentosController::class, 'index'])->name('medicamentos-admin');
+Route::get('/admin/medicamentos/crear', [MedicamentosController::class, 'create'])->name('medicamentos-admin-crear');
+Route::post('/admin/medicamentos/crear', [MedicamentosController::class, 'store'])->name('medicamentos.store');
+Route::delete('/admin/medicamentos/{id}', [MedicamentosController::class, 'destroy'])->name('medicamentos-admin-delete');
+Route::get('/admin/medicamentos/editar/{id}', [MedicamentosController::class, 'edit'])->name('medicamentos-admin-edit');
+Route::patch('/admin/medicamentos/editar/{id}', [MedicamentosController::class, 'update'])->name('medicamentos-admin-update');
+Route::get('/admin/medicamentos/view/{id}', [MedicamentosController::class, 'show'])->name('medicamentos-admin-view');
+
+// Medicamentos API routes
+Route::apiResource('medicamentos', ApiMedicamentosController::class);
+Route::get('/api/medicamentos', [ApiMedicamentosController::class, 'index']);
+Route::get('/api/medicamentos/{id}', [ApiMedicamentosController::class, 'show']);
+Route::patch('/api/medicamentos/{id}', [ApiMedicamentosController::class, 'update']);
+Route::post('/api/medicamentos', [ApiMedicamentosController::class, 'store']);
+Route::delete('/api/medicamentos/{id}', [ApiMedicamentosController::class, 'destroy']);
+

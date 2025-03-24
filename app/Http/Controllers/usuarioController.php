@@ -68,4 +68,3 @@ class UsuarioController extends Controller
         return redirect()->route('usuarios.index') ;
     }
 }
-
