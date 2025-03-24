@@ -15,6 +15,7 @@ class Doctores extends Model implements AuthenticatableContract
     protected $connection = 'mongodb';
     protected $table = 'usuarios';
 
+    //MOngoDB colección
     protected $fillable = [
         'tipo',
         'estatus',
