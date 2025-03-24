@@ -101,5 +101,5 @@
 <script src="{{ asset('src/settings.js') }}"></script>
 <script src="{{ asset('src/todolist.js') }}"></script>
 </body>
-
 </html>
+

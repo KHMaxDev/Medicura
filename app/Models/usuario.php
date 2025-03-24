@@ -23,3 +23,4 @@ class Usuario extends Model
         return $this->contrasena === $password; // Adaptar según tu método de hash
     }
 }
+
