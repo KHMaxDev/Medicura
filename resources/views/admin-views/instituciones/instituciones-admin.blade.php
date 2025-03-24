@@ -37,12 +37,12 @@
                                 <td>{{ $institucion->nombre }}</td>
                                 <td>
                                   <!-- Mostrar los campos individuales de la dirección -->
-                                    {{ $institucion->direccion['colonia'] }},
-                                    {{ $institucion->direccion['codigo_postal'] }},
-                                    {{ $institucion->direccion['calle'] }}
-                                    #{{ $institucion->direccion['numero'] }},
-                                    {{ $institucion->direccion['ciudad'] }},
-                                    {{ $institucion->direccion['estado'] }},
+                                  Col. {{ $institucion->direccion['colonia'] }},
+                                  C.P. {{ $institucion->direccion['codigo_postal'] }},
+                                  Calle {{ $institucion->direccion['calle'] }}
+                                  #{{ $institucion->direccion['numero'] }},
+                                  {{ $institucion->direccion['ciudad'] }},
+                                  {{ $institucion->direccion['estado'] }}.
                                 </td>
                                 <td>{{ $institucion->updated_at }}</td>
                                 <td>
@@ -55,7 +55,7 @@
                                 <form action="{{ route('instituciones-admin-delete', $institucion->_id) }}" method="POST" style="display:inline">
                                     @csrf  <!-- Token CSRF obligatorio -->
                                     @method('DELETE')  <!-- Indica que la solicitud es DELETE -->
-                                    <button type="submit" class="btn btn-inverse-danger btn-icon">
+                                    <button type="submit" class="btn btn-inverse-danger btn-icon btn-delete">
                                         <i class="ti-trash"></i>
                                     </button>
                                 </form>                          
@@ -66,8 +66,10 @@
                     </table>
                 </div>
             </div>
-          </div>
+          </div>        
+          <a href="{{route('instituciones-admin-pdf')}}" target="_blank" type="button"class="btn btn-info">Generar reporte</a>
         </div>
+
         <!-- content-wrapper ends -->
         <!-- partial:../../partials/_footer.html -->
         <!-- partial -->
@@ -77,7 +79,28 @@
     <!-- page-body-wrapper ends -->
   </div>
   @endsection
-  <!-- container-scroller -->
+  <!-- Delete -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+    $(".btn-delete").click(function(e){
+      e.preventDefault();
+      var form = $(this).parents("form");
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          form.submit();
+        }
+      });
+    });
+   </script>
 <!-- plugins:js -->
 <script src="{{ asset('src/js/vendor.bundle.base.js') }}"></script>
 <!-- endinject -->

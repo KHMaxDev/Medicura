@@ -1,17 +1,19 @@
 <?php
-
 namespace App\Models;
-use MongoDB\Laravel\Eloquent\Model;
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-//use MongoDB\Laravel\Auth\User as Authenticatable;
-//use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
-class User extends Model
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
+use MongoDB\Laravel\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
+
+class User extends Model implements AuthenticatableContract
 {
-    use HasApiTokens; // <-- Agregar este trait
+    use Authenticatable, HasFactory, Notifiable;
+
     protected $connection = 'mongodb';
-    protected $collection = 'usuarios';
+    protected $table = 'usuarios';
 
     protected $fillable = [
         'nombre',
@@ -23,18 +25,19 @@ class User extends Model
     ];
 
     protected $primaryKey = '_id';
+
     protected $casts = [
-        '_id' =>'string',
+        '_id' => 'string',
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
     ];
 
-    
     protected $hidden = ['contrasena'];
     public $timestamps = true;
 
+    // Método para verificar contraseñas hasheadas
     public function validatePassword($password)
     {
-        return $this->contrasena === $password;
+        return Hash::check($password, $this->contrasena);
     }
 }

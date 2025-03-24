@@ -37,7 +37,7 @@
       </a>
       <div class="collapse" id="ui-basic">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="/proyecto_medicura/MedicuraV4/admin/medicos.php">Médicos</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/doctor') }}">Médicos</a></li>
           <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/paciente') }}">Pacientes</a></li>
           <li class="nav-item"> <a class="nav-link" href="/proyecto_medicura/MedicuraV4/admin/cuidadores.php">Cuidadores</a></li>
         </ul>
@@ -53,7 +53,7 @@
       <div class="collapse" id="charts">
         <ul class="nav flex-column sub-menu">
           <!--Agregar elementos (discutir)-->
-          <li class="nav-item"> <a class="nav-link" href="/proyecto_medicura/medicurav4/admin/reportes.php">Estatus</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/reportes') }}">Estatus</a></li>
         </ul>
       </div>
     </li>

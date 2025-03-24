@@ -99,30 +99,53 @@
             color: #1E90FF;
             font-size: 2rem;
         }
-
         .team-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
 
-        .team-member {
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 15px;
-            text-align: center;
-            width: 200px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+.team-member {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    width: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-        .team-member img {
-            border-radius: 50%;
-            width: 100px;
-            height: 100px;
-            margin-bottom: 15px;
-        }
+/* Para pantallas grandes (pantallas extendidas) */
+@media (min-width: 1024px) {
+    .team-member {
+        flex: 1 1 30%; /* 3 tarjetas por fila */
+        max-width: 30%; /* Asegura que no se superen */
+    }
+}
+
+/* Para pantallas medianas (pantallas más pequeñas, como tabletas o móviles en modo apaisado) */
+@media (max-width: 1024px) and (min-width: 768px) {
+    .team-member {
+        flex: 1 1 45%; /* 2 tarjetas por fila */
+        max-width: 45%;
+    }
+}
+
+/* Para pantallas pequeñas (móviles en modo vertical) */
+@media (max-width: 768px) {
+    .team-member {
+        flex: 1 1 100%; /* 1 tarjeta por fila */
+        max-width: 100%;
+    }
+}
+
+.team-member img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+}
 
         form {
             max-width: 500px;
@@ -172,7 +195,10 @@
             <li><a href="#equipo">Equipo</a></li>
             <li><a href="#contactanos">Contáctanos</a></li>
             <li><a href="{{ url('login') }}">Inicio de Sesión</a></li>
+<<<<<<< HEAD
+=======
             <li><a href="{{ url('admin') }}">Administrador</a></li>
+>>>>>>> 7e669ee6325f3f82066542eac4357ebc72f4d0fc
         </ul>
     </nav>
 
@@ -199,12 +225,12 @@
         <div class="team-container">
             <?php
             $equipo = [
-                ["nombre" => "Pedro Dzul", "rol" => "Líder | Diseño móvil", "imagen" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYVYxhM7Gr3AGVnVwMxuzNF3SP9dLhw2Pf3g&s"],
-                ["nombre" => "Angel", "rol" => "Diseño web", "imagen" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJOUqH_zWYTlVMdVJ7ZE2xrY1PVgZFSySJiQ&s"],
-                ["nombre" => "Steven", "rol" => "Diseño web", "imagen" => "https://antipode-peru.com/info/c-est-quoi-un-gringo--1.jpeg"],
-                ["nombre" => "Madox", "rol" => "Líder | Diseño web", "imagen" => "https://i.pinimg.com/280x280_RS/f5/fa/1e/f5fa1e1989495b2ce6b32fba901981e6.jpg"],
-                ["nombre" => "Anderson", "rol" => "Administrador BD", "imagen" => "https://cdn.proboxtv.com/uploads/canelo_alvarez_ac939468f5.jpg"],
-                ["nombre" => "Salvador", "rol" => "Diseño web", "imagen" => "https://phantom-marca-mx.unidadeditorial.es/8b0fabe7b7e710222127b342ffe35a67/resize/828/f/jpg/mx/assets/multimedia/imagenes/2023/02/20/16769270250490.jpg"],
+                ["nombre" => "Pedro Dzul", "rol" => "Líder | Diseño móvil", "imagen" => "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png"],
+                ["nombre" => "Angel Uitzil", "rol" => "Diseño y desarrollo web", "imagen" => "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png"],
+                ["nombre" => "Steven Ku", "rol" => "Diseño y desarrollo web", "imagen" => "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png"],
+                ["nombre" => "Madox Que", "rol" => "Líder | Diseño y desarrollo web", "imagen" => "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png"],
+                ["nombre" => "Ali Cob", "rol" => "Desarrollo y administración de BD", "imagen" => "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png"],
+                ["nombre" => "Salvador Poot", "rol" => "Diseño web", "imagen" => "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png"],
             ];
 
             foreach ($equipo as $miembro) {

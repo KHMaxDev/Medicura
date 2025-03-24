@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Institucion;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class institucionesController extends Controller
 {
@@ -112,5 +113,11 @@ class institucionesController extends Controller
         //Al realizar la eliminación, devuelve nuevamente la página principal (hace un refresh)
         $institucion->delete();
         return redirect()->route('instituciones-admin')->with('success', 'Institución eliminada con éxito');
+    }
+
+    public function PDF(Request $request){
+        $instituciones = Institucion::all();
+        $pdf = \PDF::loadView('admin-views.instituciones.instituciones-admin-pdf', compact('instituciones'))->setOptions(['isHtml5ParserEnabled' => true, 'isPhpEnabled' => true, 'isHtml5ParserEnabled' => true])->setPaper('letter', 'landscape');
+        return $pdf->download('Instituciones_admin.pdf');
     }
 }
