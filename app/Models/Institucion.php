@@ -5,6 +5,7 @@ namespace App\Models;
 use MongoDB\Laravel\Eloquent\Model;
 class Institucion extends Model
 {
+    protected $connection = 'mongodb';
     protected $collection = 'instituciones'; // Nombre de la colección en MongoDB
 
     protected $fillable = [

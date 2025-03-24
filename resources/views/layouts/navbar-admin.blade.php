@@ -45,8 +45,9 @@
   </style>
   <!-- Verificar si NO estamos en la página /admin -->
 @if(!request()->is('admin'))
+
   <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <!-- DataTables -->
   <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
@@ -93,16 +94,19 @@
     <ul class="navbar-nav navbar-nav-right">
       <!---->
       <li class="nav-item nav-profile dropdown">
-        <a class="nav-link dropdown-toggle" href="{{ url('admin') }}" data-toggle="dropdown" id="profileDropdown">
-          <img src="{{asset('favicon.png')}}" alt="profile"/>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-          <a class="dropdown-item" href="{{url('/')}}">
-            <i class="ti-power-off text-primary"></i>
-            Cerrar sesión
-          </a>
-        </div>
-      </li>
+     <a class="nav-link dropdown-toggle" href="{{ url('admin') }}" data-toggle="dropdown" id="profileDropdown">
+         <img src="{{asset('favicon.png')}}" alt="profile"/>
+     </a>
+     <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+         <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+             @csrf  <!-- Asegúrate de incluir el token CSRF aquí -->
+             <button type="submit" class="dropdown-item">
+                 <i class="ti-power-off text-primary"></i>
+                 Cerrar sesión
+             </button>
+         </form>
+     </div>
+ </li>
     </ul>
     <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
       <span class="icon-menu"></span>
