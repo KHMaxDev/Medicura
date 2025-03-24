@@ -1,4 +1,4 @@
-@extends('layouts.navbar-admin')
+@extends('layouts.navbar-admin') 
 @section('content')
 <div class="main-panel" style="margin-top:1.5%">
 <h3 class="m-0 font-weight-bold text-primary">Instituciones registradas</h3>
