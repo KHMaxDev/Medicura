@@ -22,4 +22,3 @@ class Institucion extends Model
 
     public $timestamps = true; // Permite que Laravel maneje automáticamente created_at y updated_at
 }
-

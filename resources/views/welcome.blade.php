@@ -172,7 +172,7 @@
             <li><a href="#equipo">Equipo</a></li>
             <li><a href="#contactanos">Contáctanos</a></li>
             <li><a href="{{ url('login') }}">Inicio de Sesión</a></li>
-            <li><a href="{{ url('admin') }}">si</a></li>
+            <li><a href="{{ url('admin') }}">Administrador</a></li>
         </ul>
     </nav>
 

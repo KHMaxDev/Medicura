@@ -1,5 +1,5 @@
 @extends('layouts.navbar-admin')
-@section('content')
+@section('content') 
 <div class="main-panel" style="margin-top:1.5%">
     <h2 class="m-0 font-weight-bold text-primary">Editar Institución: {{ $institucion->nombre }}</h2>
     <form action="{{ route('instituciones-admin-update', $institucion->id) }}" method="POST" class="edit">
