@@ -6,6 +6,8 @@ use App\Http\Controllers\institucionesController;
 use App\Http\Controllers\pacienteController;
 use App\Http\Controllers\CitaController;
 use App\Http\Controllers\Api\CitaController as ApiCitaController;
+use App\Http\Controllers\MedicamentosController;
+use App\Http\Controllers\Api\ApiMedicamentosController;
 
 
 
@@ -58,3 +60,21 @@ Route::get('/api/citas/{id}', [ApiCitaController::class, 'show']);
 Route::patch('/api/citas/{id}', [ApiCitaController::class, 'update']);
 Route::post('/api/citas', [ApiCitaController::class, 'store']);
 Route::delete('/api/citas/{id}', [ApiCitaController::class, 'destroy']);
+
+// Medicamentos web routes
+Route::resource('medicamentos', MedicamentosController::class);
+Route::get('/admin/medicamentos', [MedicamentosController::class, 'index'])->name('medicamentos-admin');
+Route::get('/admin/medicamentos/crear', [MedicamentosController::class, 'create'])->name('medicamentos-admin-crear');
+Route::post('/admin/medicamentos/crear', [MedicamentosController::class, 'store'])->name('medicamentos.store');
+Route::delete('/admin/medicamentos/{id}', [MedicamentosController::class, 'destroy'])->name('medicamentos-admin-delete');
+Route::get('/admin/medicamentos/editar/{id}', [MedicamentosController::class, 'edit'])->name('medicamentos-admin-edit');
+Route::patch('/admin/medicamentos/editar/{id}', [MedicamentosController::class, 'update'])->name('medicamentos-admin-update');
+Route::get('/admin/medicamentos/view/{id}', [MedicamentosController::class, 'show'])->name('medicamentos-admin-view');
+
+// Medicamentos API routes
+Route::apiResource('medicamentos', ApiMedicamentosController::class);
+Route::get('/api/medicamentos', [ApiMedicamentosController::class, 'index']);
+Route::get('/api/medicamentos/{id}', [ApiMedicamentosController::class, 'show']);
+Route::patch('/api/medicamentos/{id}', [ApiMedicamentosController::class, 'update']);
+Route::post('/api/medicamentos', [ApiMedicamentosController::class, 'store']);
+Route::delete('/api/medicamentos/{id}', [ApiMedicamentosController::class, 'destroy']);
