@@ -1,20 +1,22 @@
 <?php
 use App\Http\Controllers\Api\ApiController;
 use Illuminate\Support\Facades\Route;
+/**
+ * Controladores Admin
+ * 
+ */
 use App\Http\Controllers\admin;
 use App\Http\Controllers\institucionesController;
 use App\Http\Controllers\pacienteController;
 use App\Http\Controllers\AuthController;
-<<<<<<< HEAD
+//PDF
 use App\Http\Controllers\adminReporteController;
 use App\Http\Controllers\doctoresController;
 use App\Http\Controllers\registroController;
 
-//Pagina principal
-Route::get('/', function () {
-    return view('welcome');
-});
-=======
+/**
+ * Controladores Doctor
+ */
 use App\Http\Controllers\usuarioController;
 use App\Models\Usuario;
 use App\Http\Controllers\CitaController;
@@ -24,12 +26,8 @@ use App\Http\Controllers\MedicamentosController;
 use App\Http\Controllers\Api\ApiMedicamentosController;
 
 Route::get('/', function () {
- return view('welcome');
-});
-
-
-
->>>>>>> 7e669ee6325f3f82066542eac4357ebc72f4d0fc
+    return view('welcome'); // O cualquier otra vista que consideres como la principal
+})->name('principal');
 
 //Auth
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -41,15 +39,11 @@ Route::post('/registro', [doctoresController::class, 'store'])->name('doctor-cre
 
 //Auth para admin
 Route::middleware(['auth', 'admin'])->group(function () {
-<<<<<<< HEAD
 //admin index
-=======
-
-
-
->>>>>>> 7e669ee6325f3f82066542eac4357ebc72f4d0fc
 Route::get('/admin', [admin::class, 'index'])->name('admin');
-//Instituciones
+//Doctores-view
+Route::get('/admin/doctor', [doctoresController::class, 'index'])->name('doctor-admin');
+//Instituciones-views
 Route::resource('instituciones', institucionesController::class);
 Route::get('/admin/instituciones', [institucionesController::class, 'index'])->name('instituciones-admin');
 Route::get('/admin/instituciones/crear', [institucionesController::class, 'create'])->name('instituciones-admin-crear');
@@ -58,28 +52,31 @@ Route::delete('/admin/instituciones/{id}', [InstitucionesController::class, 'des
 Route::get('/admin/instituciones/editar/{id}', [institucionesController::class, 'edit'])->name('instituciones-admin-edit');
 Route::patch('/admin/instituciones/editar/{id}', [institucionesController::class, 'update'])->name('instituciones-admin-update');
 Route::get('/admin/instituciones/visualizar/{id}', [institucionesController::class, 'show'])->name('instituciones-admin-visualizar');
-<<<<<<< HEAD
+//PDF
 Route::get('/admin/instituciones/pdf', [institucionesController::class, 'PDF'])->name('instituciones-admin-pdf');
-=======
 
->>>>>>> 7e669ee6325f3f82066542eac4357ebc72f4d0fc
 //Paciente
 Route::resource('paciente', pacienteController::class);
 Route::get('/admin/paciente', [pacienteController::class, 'index'])->name('paciente-admin');
 
-Route::resource('/admin/reportes', adminReporteController::class);
+//Reportes
+Route::get('/admin/reportes', [adminReporteController::class,'index']);
+Route::get('/admin/solicitudes', [adminReporteController::class,'solicitudes'])->name('solicitudes');
+Route::put('/admin/solicitudes/{id}', [DoctoresController::class, 'update'])->name('aprobar.update');
 
-Route::get('/admin/doctor', [doctoresController::class, 'index'])->name('doctor-admin');
 });
 
 //Auth para doctor
 /* 
-Route::middleware(['auth', 'doctor'])->group(function () {
-    Route::get('/doctor', [DoctorController::class, 'index'])->name('doctor.dashboard');
-});
+#Meter dentro de esta función las rutas junto con el dashboard de doctor
+#Aquí irán todas las rutas que hagan mención a la carpeta doctor-views
+
+#Solamente des comenten el Route ubicado justo abajo de este comentario
 */
-<<<<<<< HEAD
-=======
+
+//Route::middleware(['auth', 'doctor'])->group(function () {
+//    Route::get('/doctor', [DoctorController::class, 'index'])->name('doctor.dashboard');
+//});
 
 //Usuario-paciente
 Route::resource('usuario', usuarioController::class);
@@ -151,4 +148,3 @@ Route::patch('/api/medicamentos/{id}', [ApiMedicamentosController::class, 'updat
 Route::post('/api/medicamentos', [ApiMedicamentosController::class, 'store']);
 Route::delete('/api/medicamentos/{id}', [ApiMedicamentosController::class, 'destroy']);
 
->>>>>>> 7e669ee6325f3f82066542eac4357ebc72f4d0fc
