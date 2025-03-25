@@ -20,6 +20,7 @@ class User extends Model implements AuthenticatableContract
         'tipo',
         'email',
         'contrasena',
+        'estatus',
         'created_at',
         'updated_at'
     ];
