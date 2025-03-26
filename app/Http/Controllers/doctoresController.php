@@ -64,12 +64,12 @@ class doctoresController extends Controller
 
         // Hashear la contraseña antes de guardar
         $data['contrasena'] = Hash::make($data['contrasena']);
-
+        
         // Crear y guardar el nuevo registro
         $doctor = new Doctores($data);
         $doctor->save();   
 
-        return redirect()->route('admin-views.medicos.doctores-admin')
+        return redirect()->route('principal')
             ->with('success', 'Doctor creado exitosamente.');
     }
 
@@ -86,8 +86,25 @@ class doctoresController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Encuentra al doctor con el ID proporcionado
+        $doctor = Doctores::find($id);
+    
+        if (!$doctor) {
+            return redirect()->route('solicitudes')->with('error', 'Doctor no encontrado.');
+        }
+    
+        // Actualiza el estatus
+        $doctor->estatus = $request->input('estatus', 'activo'); // Asegura que el estatus sea 'activo' por defecto
+        $doctor->updated_at = now();
+    
+        // Guarda los cambios y verifica si se guardaron correctamente
+        if ($doctor->save()) {
+            return redirect()->route('solicitudes')->with('success', 'Solicitud aprobada con éxito.');
+        } else {
+            return redirect()->back()->with('error', 'Error al actualizar el estatus.');
+        }
     }
+    
 
     /**
      * Remove the specified resource from storage.

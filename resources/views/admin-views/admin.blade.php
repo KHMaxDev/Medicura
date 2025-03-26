@@ -33,9 +33,9 @@
                 <div class="col-md-6 mb-4 stretch-card transparent">
                   <div class="card card-tale">
                     <div class="card-body">
-                      <p class="mb-4">Usuarios totales</p>
-                      <p class="fs-30 mb-2"><?php //echo $usuarios?></p>
-                      <p>Usuarios registrados</p>
+                      <p class="mb-4">Solicitudes</p>
+                      <p class="fs-30 mb-2">{{$doctoresCount}}</p>
+                      <p>Usuarios pendientes (Doctor)</p>
                     </div>
                   </div>
                 </div>

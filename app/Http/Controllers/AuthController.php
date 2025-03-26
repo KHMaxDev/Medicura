@@ -26,10 +26,10 @@ class AuthController extends Controller
         // Buscar usuario por email
         $user = User::where('email', Str::lower($credentials['email']))->first();
     
-        if (!$user) {
-            return back()->with('error', 'Usuario no encontrado.');
+        if (!$user || $user->estatus !== 'activo') {
+            return back()->with('error', 'Usuario no encontrado o no valido.');
         }
-    
+        
         // Verificar si la contraseña es correcta
         if (!Hash::check($credentials['contrasena'], $user->contrasena)) {
             return back()->with('error', 'Correo o contraseña incorrecta.');
