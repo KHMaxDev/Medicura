@@ -194,11 +194,7 @@
             <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
             <li><a href="#equipo">Equipo</a></li>
             <li><a href="#contactanos">Contáctanos</a></li>
-            <li><a href="{{ url('login') }}">Inicio de Sesión</a></li>
-<<<<<<< HEAD
-=======
-            <li><a href="{{ url('admin') }}">Administrador</a></li>
->>>>>>> 7e669ee6325f3f82066542eac4357ebc72f4d0fc
+            <li><a href="{{ url('login') }}">Inicio de Sesión</a></li>     
         </ul>
     </nav>
 
