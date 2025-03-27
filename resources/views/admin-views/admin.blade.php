@@ -7,7 +7,7 @@
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold">Bienvenido administrador</h3>
+                  <h3 class="font-weight-bold">Bienvenido administrador {{$adminInfo->nombre}}</h3>
                   <h6 class="font-weight-normal mb-0">Vista rápida de la información</h6>
                 </div>
               </div>
@@ -57,7 +57,7 @@
                   <div class="card card-light-blue">
                     <div class="card-body">
                       <p class="mb-4">Médicos</p>
-                      <p class="fs-30 mb-2"><?php// echo $cantidad?></p>
+                      <p class="fs-30 mb-2">{{$doctoresAct}}</p>
                       <p>Aplicativo Web</p>
                     </div>
                   </div>

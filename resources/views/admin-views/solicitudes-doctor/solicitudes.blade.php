@@ -30,7 +30,11 @@
                           <input type="hidden" name="estatus" value="activo">
                           <button type="submit" class="btn btn-primary">Aprobar solicitud</button>
                       </form>
-                        <a href="#" class="btn btn-danger">Denegar solicitud</a>
+                      <form action="{{ route('eliminar.destroy', $doctor->id) }}" method="POST" style="display: inline;">
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" class="btn btn-danger">Denegar solicitud</button>
+                      </form>
                     </div>
 
                 </div>

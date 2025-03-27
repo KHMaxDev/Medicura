@@ -76,65 +76,58 @@
     <div class="login-container">
         <div class="login-header">Registro de Doctor</div>
         <form action="{{ route('doctor-crear') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="form-group">
-                <label>Nombre</label>
-                <input type="text" name="nombre" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label>Apellido Paterno</label>
-                <input type="text" name="apellido_paterno" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label>Apellido Materno</label>
-                <input type="text" name="apellido_materno" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" name="email" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label>Contraseña</label>
-                <input type="password" name="contrasena" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label>Celular</label>
-                <input type="tel" name="celular" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label>Foto de Perfil</label>
-                <input type="file" name="foto_perfil" class="form-control" accept="image/*" required>
-            </div>
-            <div class="form-group">
-                <label>Fecha de Nacimiento</label>
-                <input type="date" name="fecha_nacimiento" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label>Género</label>
-                <select name="genero" class="form-control" required>
-                    <option value="Masculino">Masculino</option>
-                    <option value="Femenino">Femenino</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>CURP</label>
-                <input type="text" name="curp" class="form-control" maxlength="18" required>
-            </div>
-            <div class="form-group">
-                <label>Cédula Profesional</label>
-                <input type="text" name="cedula" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label>Especialidad</label>
-                <input type="text" name="especialidad" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label>Institución</label>
-                <input type="text" name="institucion" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-login">Registrar</button>
-            <a href="{{ url('/') }}" class="btn btn-cancel">Cancelar</a>
-        </form>
+    @csrf
+    <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" name="nombre" class="form-control" required placeholder="Ej. Juan">
+    </div>
+    <div class="form-group">
+        <label>Apellido Paterno</label>
+        <input type="text" name="apellido_paterno" class="form-control" required placeholder="Ej. Pérez">
+    </div>
+    <div class="form-group">
+        <label>Apellido Materno</label>
+        <input type="text" name="apellido_materno" class="form-control" required placeholder="Ej. García">
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" class="form-control" required placeholder="ejemplo@gmail.com">
+    </div>
+    <div class="form-group">
+        <label>Celular</label>
+        <input type="tel" name="celular" class="form-control" required placeholder="Ej. 1234567890">
+    </div>
+    <div class="form-group">
+        <label>Fecha de Nacimiento</label>
+        <input type="date" name="fecha_nacimiento" class="form-control" required max="2004-12-31">
+    </div>
+    <div class="form-group">
+        <label>Género</label>
+        <select name="genero" class="form-control" required>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+            <option value="No especifica">No especifica</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>CURP</label>
+        <input type="text" name="curp" class="form-control" maxlength="18" required placeholder="Ej. ABCD123456HDFGRR01">
+    </div>
+    <div class="form-group">
+        <label>Cédula Profesional</label>
+        <input type="text" name="cedula" class="form-control" required placeholder="Ej. 12345678">
+    </div>
+    <div class="form-group">
+        <label>Especialidad</label>
+        <input type="text" name="especialidad" class="form-control" required placeholder="Ej. Cardiología">
+    </div>
+    <div class="form-group">
+        <label>Institución</label>
+        <input type="text" name="institucion" class="form-control" required placeholder="Ej. Universidad Nacional Autónoma de México">
+    </div>
+    <button type="submit" class="btn btn-login">Registrar</button>
+    <a href="{{ url('/') }}" class="btn btn-cancel">Cancelar</a>
+</form>
         <div class="footer">© 2025 Medicura</div>
     </div>
 </body>
