@@ -36,6 +36,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/registro', [doctoresController::class, 'registro'])->name('registro');
 Route::post('/registro', [doctoresController::class, 'store'])->name('doctor-crear');
+Route::get('/registro=confirmado',[doctoresController::class,'exitoso'])->name('registro-exitoso');
 
 //Auth para admin
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -54,6 +55,7 @@ Route::patch('/admin/instituciones/editar/{id}', [institucionesController::class
 Route::get('/admin/instituciones/visualizar/{id}', [institucionesController::class, 'show'])->name('instituciones-admin-visualizar');
 //PDF
 Route::get('/admin/instituciones/pdf', [institucionesController::class, 'PDF'])->name('instituciones-admin-pdf');
+Route::get('/admin/doctor/pdf', [doctoresController::class, 'doctoresPDF'])->name('doctores-admin-pdf');
 
 //Paciente
 Route::resource('paciente', pacienteController::class);
@@ -63,6 +65,8 @@ Route::get('/admin/paciente', [pacienteController::class, 'index'])->name('pacie
 Route::get('/admin/reportes', [adminReporteController::class,'index']);
 Route::get('/admin/solicitudes', [adminReporteController::class,'solicitudes'])->name('solicitudes');
 Route::put('/admin/solicitudes/{id}', [DoctoresController::class, 'update'])->name('aprobar.update');
+Route::delete('/admin/solicitudes/{id}', [DoctoresController::class, 'destroy'])->name('eliminar.destroy');
+
 
 });
 
@@ -98,15 +102,10 @@ Route::delete('/api/usuarios/{id}', [ApiController::class, 'destroy']);
 
 // usuarios-paciente
 Route::put('admin/usuarios/editar/{id}', [UsuarioController::class, 'update']);
-
 Route::get('/admin/usuarios/crear', [usuarioController::class, 'create'])->name('usuarios.create');
-
 Route::get('/admin/usuarios/{id}', [usuarioController::class, 'show'])->name('usuarios.show');
-
 Route::get('/admin/usuarios/destroy/{id}', action: [usuarioController::class, 'destroy'])->name('usuarios.destroy');
-
 Route::delete('admin/usuarios/destroy/{id}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');
-
 Route::get('/admin/usuarios/editar/{id}', [usuarioController::class, 'edit'])->name('usuarios.edit');
 
 // Citas routes

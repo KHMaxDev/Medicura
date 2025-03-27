@@ -60,7 +60,7 @@
                 </div>
             </div>
           </div>        
-          <a href="" target="_blank" type="button"class="btn btn-info">Generar reporte</a>
+          <a href="{{route('doctores-admin-pdf')}}" target="_blank" type="button"class="btn btn-info">Generar reporte</a>
         </div>
 
         <!-- content-wrapper ends -->
