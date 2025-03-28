@@ -96,9 +96,9 @@ Route::delete('/admin/solicitudes/{id}', [DoctoresController::class, 'destroy'])
 #Solamente des comenten el Route ubicado justo abajo de este comentario
 */
 
-//Route::middleware(['auth', 'doctor'])->group(function () {
-//    Route::get('/doctor', [DoctorController::class, 'index'])->name('doctor.dashboard');
-//});
+Route::middleware(['auth', 'doctor'])->group(function () {
+    Route::get('/doctor', [DoctorController::class, 'index'])->name('doctor.dashboard');
+});
 
 // Usuario-paciente
 Route::resource('usuario', usuarioController::class);
