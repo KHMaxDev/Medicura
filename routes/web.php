@@ -86,7 +86,7 @@ Route::put('/admin/solicitudes/{id}', [DoctoresController::class, 'update'])->na
 Route::delete('/admin/solicitudes/{id}', [DoctoresController::class, 'destroy'])->name('eliminar.destroy');
 
 
-});
+//Doctores
 
 //Auth para doctor
 /* 
