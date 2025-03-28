@@ -21,10 +21,10 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'contrasena');
     
         // Convertir email a minúsculas para evitar problemas de mayúsculas/minúsculas
-        $email = strtolower($credentials['email']);
+        $email = $credentials['email'];
     
         // Buscar usuario por email
-        $user = User::where('email', Str::lower($credentials['email']))->first();
+        $user = User::where('email', $credentials['email'])->first();
     
         if (!$user || $user->estatus !== 'activo') {
             return back()->with('error', 'Usuario no encontrado o no valido.');
@@ -39,7 +39,7 @@ class AuthController extends Controller
     
         return $user->tipo === 'admin'
             ? redirect()->route('admin')
-            : redirect()->route('doctor.dashboard');
+            : redirect()->route('dashboard');
     }
     
 
