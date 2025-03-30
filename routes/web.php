@@ -24,7 +24,7 @@ use App\Http\Controllers\Api\CitaController as ApiCitaController;
 use App\Http\Controllers\reportesController;
 use App\Http\Controllers\MedicamentosController;
 use App\Http\Controllers\Api\ApiMedicamentosController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DoctorController;
 
 // Pagina principal
 Route::get('/', function () {
@@ -96,21 +96,18 @@ Route::delete('/admin/solicitudes/{id}', [DoctoresController::class, 'destroy'])
 #Solamente des comenten el Route ubicado justo abajo de este comentario
 */
 
-Route::middleware(['auth', 'doctor'])->group(function () {
-    Route::get('/doctor', [DoctorController::class, 'index'])->name('doctor.dashboard');
-});
 
 // Usuario-paciente
 Route::resource('usuario', usuarioController::class);
 
 // API Usuario-paciente
-Route::apiResource('usuario', ApiController::class);
+/*Route::apiResource('usuario', ApiController::class);
 Route::get('/api/usuarios', [ApiController::class, 'index']);
 Route::get('/api/usuarios/{id}', [ApiController::class, 'show']);
 Route::patch('/api/usuarios/{id}', [ApiController::class, 'update']);
 Route::post('/api/usuarios', [ApiController::class, 'store']);
 Route::delete('/api/usuarios/{id}', [ApiController::class, 'destroy']);
-
+*/
 // usuarios-paciente
 Route::put('admin/usuarios/editar/{id}', [UsuarioController::class, 'update']);
 
@@ -136,5 +133,26 @@ Route::resource('medicamentos', MedicamentosController::class);
 Route::apiResource('medicamentos', ApiMedicamentosController::class);
 
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+//Doctor Website :)
+/*
+Route::middleware(['auth', 'doctor'])->group(function () {
+    Route::get('/doctor', [DoctorController::class, 'index'])->name('doctor');
+});
+*/
 
+// Citas views for Doctor
+Route::middleware(['auth', 'doctor'])->group(function () {
+    // Remove: Route::resource('citas', CitaController::class); // Conflicts with custom routes
+
+    // Dashboard
+    Route::get('/doctor', [DoctorController::class, 'index'])->name('doctor');
+
+    // Citas Routes
+    Route::get('/doctor/citas', [CitaController::class, 'index'])->name('citas-doctor');
+    Route::get('/doctor/citas/crear', [CitaController::class, 'create'])->name('citas-doctor-create');
+    Route::post('/doctor/citas/crear', [CitaController::class, 'store'])->name('citas-doctor-store');
+    Route::get('/doctor/citas/visualizar/{id}', [CitaController::class, 'show'])->name('citas-doctor-view');
+    Route::get('/doctor/citas/editar/{id}', [CitaController::class, 'edit'])->name('citas-doctor-edit');
+    Route::patch('/doctor/citas/editar/{id}', [CitaController::class, 'update'])->name('citas-doctor-update');
+    Route::delete('/doctor/citas/{id}', [CitaController::class, 'destroy'])->name('citas-doctor-delete');
+});

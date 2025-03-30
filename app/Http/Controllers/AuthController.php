@@ -39,7 +39,7 @@ class AuthController extends Controller
     
         return $user->tipo === 'admin'
             ? redirect()->route('admin')
-            : redirect()->route('dashboard');
+            : redirect()->route('doctor');
     }
     
 

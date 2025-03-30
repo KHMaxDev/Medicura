@@ -19,13 +19,14 @@
 </div>
 <!-- partial -->
 <!-- partial:partials/_sidebar.html -->
+<!-- partial:partials/_sidebar.html -->
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
-    <!-- Dashboard -->
+    <!-- Página de inicio -->
     <li class="nav-item">
       <a class="nav-link" href="{{ url('doctor') }}">
         <i class="icon-grid menu-icon"></i>
-        <span class="menu-title">Dashboard</span>
+        <span class="menu-title">Inicio</span>
       </a>
     </li>
     
@@ -36,35 +37,28 @@
         <span class="menu-title">Pacientes</span>
       </a>
     </li>
-    
-    <!-- Tratamientos -->
+
+    <!-- Tratamientos (Standalone) -->
     <li class="nav-item">
-      <a class="nav-link" data-toggle="collapse" href="#tratamientos" aria-expanded="false" aria-controls="tratamientos">
+      <a class="nav-link" href="{{ url('doctor/tratamientos') }}">
         <i class="ti-support menu-icon"></i>
         <span class="menu-title">Tratamientos</span>
-        <i class="menu-arrow"></i>
       </a>
-      <div class="collapse" id="tratamientos">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{{ url('doctor/tratamientos') }}"> Mis Tratamientos</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{{ url('doctor/medicamentos') }}"> Medicamentos </a></li>
-        </ul>
-      </div>
+    </li>
+
+    <!-- Medicamentos (Standalone) -->
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url('doctor/medicamentos') }}">
+        <i class="ti-heart-broken menu-icon"></i>
+        <span class="menu-title">Medicamentos</span>
+      </a>
     </li>
     
     <!-- Citas -->
     <li class="nav-item">
       <a class="nav-link" href="{{ url('doctor/citas') }}">
-        <i class="icon-calendar menu-icon"></i>
+        <i class="ti-calendar menu-icon"></i>
         <span class="menu-title">Citas</span>
-      </a>
-    </li>
-    
-    <!-- Reportes Médicos -->
-    <li class="nav-item">
-      <a class="nav-link" href="{{ url('doctor/reportes') }}">
-        <i class="icon-bar-graph menu-icon"></i>
-        <span class="menu-title">Reportes Médicos</span>
       </a>
     </li>
   </ul>
