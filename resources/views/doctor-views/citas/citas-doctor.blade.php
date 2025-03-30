@@ -1,4 +1,4 @@
-@extends('layouts.navbar-admin')
+@extends('layouts.navbar-doctor')
 @section('content')
 <div class="main-panel" style="margin-top:1.5%">
     <h3 class="m-0 font-weight-bold text-primary">Lista de Citas</h3>
@@ -44,13 +44,13 @@
                                 <td>{{ $cita->doctor_nombre }}</td>
                                 <td>{{ $cita->razon }}</td>
                                 <td>
-                                    <button type="button" class="btn btn-inverse-primary btn-icon" onclick="location.href='{{ route('citas-admin-view', $cita->_id) }}'">
+                                    <button type="button" class="btn btn-inverse-primary btn-icon" onclick="location.href='{{ route('citas-doctor-view', $cita->_id) }}'">
                                         <i class="ti-eye"></i>
                                     </button>
-                                    <button type="button" class="btn btn-inverse-dark btn-icon" onclick="location.href='{{ route('citas-admin-edit', $cita->_id) }}'">
+                                    <button type="button" class="btn btn-inverse-dark btn-icon" onclick="location.href='{{ route('citas-doctor-edit', $cita->_id) }}'">
                                         <i class="ti-marker-alt"></i>
                                     </button>
-                                    <form action="{{ route('citas-admin-delete', $cita->_id) }}" method="POST" style="display:inline">
+                                    <form action="{{ route('citas-doctor-delete', $cita->_id) }}" method="POST" style="display:inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-inverse-danger btn-icon" onclick="return confirm('¿Eliminar esta cita?')">
