@@ -26,6 +26,9 @@ use App\Http\Controllers\MedicamentosController;
 use App\Http\Controllers\Api\ApiMedicamentosController;
 use App\Http\Controllers\DoctorController;
 
+//contacto
+use App\Http\Controllers\ContactoController;
+
 // Pagina principal
 Route::get('/', function () {
     return view('welcome');
@@ -156,3 +159,6 @@ Route::middleware(['auth', 'doctor'])->group(function () {
     Route::patch('/doctor/citas/editar/{id}', [CitaController::class, 'update'])->name('citas-doctor-update');
     Route::delete('/doctor/citas/{id}', [CitaController::class, 'destroy'])->name('citas-doctor-delete');
 });
+
+//contacto
+Route::post('/contacto', [ContactoController::class, 'store']);
