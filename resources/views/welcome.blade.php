@@ -241,24 +241,54 @@
     </section>
 
     <section id="contactanos">
-        <h2>Contáctanos</h2>
-        <form method="POST" action="contacto.php">
-            <div class="form-group">
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Tu email" required>
-            </div>
-            <div class="form-group">
-                <label for="mensaje">Mensaje:</label>
-                <textarea id="mensaje" name="mensaje" placeholder="Tu mensaje" required></textarea>
+    <h2>Contáctanos</h2>
 
-            </div>
-            <button type="submit">Enviar</button>
-        </form>
-    </section>
+    @if(session('success'))
+        <div class="alert alert-success" id="success-alert">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if($errors->any())
+        <div class="alert alert-danger" id="error-alert">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form method="POST" action="{{ url('contacto') }}">
+        @csrf
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Tu email" required>
+        </div>
+        <div class="form-group">
+            <label for="mensaje">Mensaje:</label>
+            <textarea id="mensaje" name="mensaje" placeholder="Tu mensaje" required></textarea>
+        </div>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <p>Si tienes alguna pregunta o necesitas más información, no dudes en contactarnos. Estamos aquí para ayudarte.</p>
+</section>
+
+<script>
+    setTimeout(() => {
+        document.getElementById('success-alert')?.remove();
+        document.getElementById('error-alert')?.remove();
+    }, 3000); // Se oculta después de 3 segundos
+</script>
+    <footer style="text-align:center">
+       
+    <p>&copy; 2025 Medicura. Todos los derechos reservados.</p>
+        <p>Desarrollado por el equipo de Medicura.</p>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 </body>
