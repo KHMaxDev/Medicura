@@ -2,21 +2,16 @@
 
 namespace App\Models;
 
-use MongoDB\Laravel\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Cita extends Model
 {
-    protected $connection = 'mongodb';
-    protected $collection = 'citas';
-    protected $primaryKey = '_id';
-
-    public $timestamps = true;
+    protected $table = 'appointments';
 
     protected $fillable = [
-        'id_doctor',
-        'id_paciente',
-        'doctor_nombre',
-        'paciente_nombre',
+        'doctor_id',
+        'patient_id',
         'fecha',
         'hora_inicio',
         'hora_fin',
@@ -25,8 +20,17 @@ class Cita extends Model
     ];
 
     protected $casts = [
-        'fecha' => 'datetime',
-        'hora_inicio' => 'datetime',
-        'hora_fin' => 'datetime',
+        'fecha' => 'date:Y-m-d',
+        'acciones' => 'array',
     ];
+
+    public function doctor(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'doctor_id');
+    }
+
+    public function patient(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'patient_id');
+    }
 }

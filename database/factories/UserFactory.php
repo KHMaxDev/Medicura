@@ -2,43 +2,61 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends Factory<User>
  */
 class UserFactory extends Factory
 {
-    /**
-     * The current password being used by the factory.
-     */
+    protected $model = User::class;
+
     protected static ?string $password;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'nombre' => fake()->firstName(),
+            'apellido_paterno' => fake()->lastName(),
+            'apellido_materno' => fake()->lastName(),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'contrasena' => static::$password ??= Hash::make('password'),
+            'tipo' => User::TYPE_PATIENT,
+            'estatus' => User::STATUS_ACTIVE,
+            'celular' => fake()->numerify('##########'),
+            'fecha_nacimiento' => fake()->dateTimeBetween('-80 years', '-18 years'),
+            'genero' => fake()->randomElement(['Masculino', 'Femenino', 'No especifica']),
+            'curp' => Str::upper(fake()->unique()->bothify('????######??????##')),
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
-    public function unverified(): static
+    public function admin(): static
     {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
+        return $this->state(fn () => [
+            'tipo' => User::TYPE_ADMIN,
+            'estatus' => User::STATUS_ACTIVE,
+            'curp' => null,
+        ]);
+    }
+
+    public function doctor(): static
+    {
+        return $this->state(fn () => [
+            'tipo' => User::TYPE_DOCTOR,
+            'estatus' => User::STATUS_ACTIVE,
+            'cedula' => fake()->unique()->numerify('#########'),
+            'especialidad' => fake()->randomElement(['Medicina general', 'Pediatría', 'Cardiología', 'Dermatología']),
+            'institucion' => 'Medicura',
+        ]);
+    }
+
+    public function pending(): static
+    {
+        return $this->state(fn () => [
+            'estatus' => User::STATUS_PENDING,
         ]);
     }
 }

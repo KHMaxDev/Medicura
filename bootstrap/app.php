@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\EnsureUserIsAdmin;
+use App\Http\Middleware\EnsureUserIsDoctor;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -12,16 +14,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // Registrar middlewares globales aquí si es necesario
-
-        // Registrar middlewares de rutas
         $middleware->alias([
-            'admin' => \App\Http\Middleware\AdminMiddleware::class,
-            'doctor' => \App\Http\Middleware\DoctorMiddleware::class,
+            'admin' => EnsureUserIsAdmin::class,
+            'doctor' => EnsureUserIsDoctor::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        // Manejo de excepciones
+        //
     })
     ->create();
-

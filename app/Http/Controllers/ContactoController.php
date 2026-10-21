@@ -2,24 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail; 
-use App\Mail\ContactoMailable; 
+use App\Http\Requests\ContactRequest;
+use App\Mail\ContactMail;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Mail;
+
 class ContactoController extends Controller
 {
-    public function store(Request $request)
+    public function store(ContactRequest $request): RedirectResponse
     {
-        $request->validate([
-            'nombre' => 'required|string|max:255',
-            'email' => 'required|email',
-            'mensaje' => 'required|string',
-        ]);
+        Mail::to(config('mail.contact_address'))->queue(new ContactMail($request->validated()));
 
-        $datos = $request->only('nombre', 'email', 'mensaje');
-
-        // Enviar correo
-        Mail::to('medicuraasistente@gmail.com')->send(new ContactoMailable($datos));
-
-        return back()->with('success', 'Mensaje enviado correctamente.');
+        return back()->with('success', 'Mensaje enviado correctamente. Te responderemos pronto.');
     }
 }

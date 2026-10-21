@@ -1,164 +1,90 @@
 <?php
-use App\Http\Controllers\Api\ApiController;
-use Illuminate\Support\Facades\Route;
-/**
- * Controladores Admin
- * 
- */
-use App\Http\Controllers\admin;
-use App\Http\Controllers\institucionesController;
-use App\Http\Controllers\pacienteController;
-use App\Http\Controllers\AuthController;
 
-//PDF
-use App\Http\Controllers\adminReporteController;
-use App\Http\Controllers\doctoresController;
-use App\Http\Controllers\registroController;
-
-/**
- * Controladores Doctor
- */
-use App\Http\Controllers\usuarioController;
-use App\Http\Controllers\CitaController;
-use App\Http\Controllers\Api\CitaController as ApiCitaController;
-use App\Http\Controllers\reportesController;
-use App\Http\Controllers\MedicamentosController;
-use App\Http\Controllers\Api\ApiMedicamentosController;
-use App\Http\Controllers\DoctorController;
-
-//contacto
+use App\Http\Controllers\Admin\AppointmentController as AdminAppointmentController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\DoctorController as AdminDoctorController;
+use App\Http\Controllers\Admin\InstitutionController as AdminInstitutionController;
+use App\Http\Controllers\Admin\MedicineController as AdminMedicineController;
+use App\Http\Controllers\Admin\PatientController as AdminPatientController;
+use App\Http\Controllers\Admin\ReportController as AdminReportController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\PasswordResetController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\Doctor\AppointmentController as DoctorAppointmentController;
+use App\Http\Controllers\Doctor\DashboardController as DoctorDashboardController;
+use App\Http\Controllers\Doctor\MedicineController as DoctorMedicineController;
+use App\Http\Controllers\Doctor\PatientController as DoctorPatientController;
+use App\Http\Controllers\Doctor\TreatmentController as DoctorTreatmentController;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Route;
 
-// Pagina principal
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('/contacto', [ContactoController::class, 'store'])
+    ->middleware('throttle:10,1')
+    ->name('contact.store');
 
-//Auth
+Route::get('/login', [LoginController::class, 'show'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])
+    ->middleware('throttle:5,1')
+    ->name('login.attempt');
 
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/registro', [RegisterController::class, 'show'])->name('register');
+Route::post('/registro', [RegisterController::class, 'register'])
+    ->middleware('throttle:5,1')
+    ->name('register.store');
+Route::get('/registro/confirmado', [RegisterController::class, 'success'])->name('register.success');
 
-Route::get('/registro', [doctoresController::class, 'registro'])->name('registro');
-Route::post('/registro', [doctoresController::class, 'store'])->name('doctor-crear');
-Route::get('/registro=confirmado',[doctoresController::class,'exitoso'])->name('registro-exitoso');
+Route::get('/recuperar-contrasena', [PasswordResetController::class, 'requestForm'])->name('password.request');
+Route::post('/recuperar-contrasena', [PasswordResetController::class, 'sendLink'])
+    ->middleware('throttle:5,1')
+    ->name('password.email');
+Route::get('/restablecer-contrasena/{user}', [PasswordResetController::class, 'resetForm'])
+    ->middleware('signed')
+    ->name('password.reset');
+Route::post('/restablecer-contrasena/{user}', [PasswordResetController::class, 'reset'])
+    ->middleware(['signed', 'throttle:5,1'])
+    ->name('password.update');
 
-// Auth para admin
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin', [admin::class, 'index'])->name('admin');
-    
-    // Instituciones
-    Route::resource('instituciones', institucionesController::class);
-    Route::get('/admin/instituciones/pdf', [institucionesController::class, 'PDF'])->name('instituciones-admin-pdf');
-    
-    // Pacientes
-    Route::resource('paciente', pacienteController::class);
-    Route::get('/admin/paciente', [pacienteController::class, 'index'])->name('paciente-admin');
-    
-    // Reportes
-    Route::resource('/admin/reportes', adminReporteController::class);
-    
-    // Doctores
-    Route::get('/admin/doctor', [doctoresController::class, 'index'])->name('doctor-admin');
-});
+Route::post('/logout', [LoginController::class, 'logout'])
+    ->middleware('auth')
+    ->name('logout');
 
-//Doctores-view
-Route::get('/admin/doctor', [doctoresController::class, 'index'])->name('doctor-admin');
-//Instituciones-views
-Route::resource('instituciones', institucionesController::class);
-Route::get('/admin/instituciones', [institucionesController::class, 'index'])->name('instituciones-admin');
-Route::get('/admin/instituciones/crear', [institucionesController::class, 'create'])->name('instituciones-admin-crear');
-Route::post('/admin/instituciones/crear', [InstitucionesController::class, 'store']);
-Route::delete('/admin/instituciones/{id}', [InstitucionesController::class, 'destroy'])->name('instituciones-admin-delete');
-Route::get('/admin/instituciones/editar/{id}', [institucionesController::class, 'edit'])->name('instituciones-admin-edit');
-Route::patch('/admin/instituciones/editar/{id}', [institucionesController::class, 'update'])->name('instituciones-admin-update');
-Route::get('/admin/instituciones/visualizar/{id}', [institucionesController::class, 'show'])->name('instituciones-admin-visualizar');
-//PDF
-Route::get('/admin/instituciones/pdf', [institucionesController::class, 'PDF'])->name('instituciones-admin-pdf');
-Route::get('/admin/doctor/pdf', [doctoresController::class, 'doctoresPDF'])->name('doctores-admin-pdf');
+Route::prefix('admin')
+    ->name('admin.')
+    ->middleware(['auth', 'admin'])
+    ->group(function () {
+        Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
 
-//Paciente
-Route::resource('paciente', pacienteController::class);
-Route::get('/admin/paciente', [pacienteController::class, 'index'])->name('paciente-admin');
+        Route::get('doctors/pdf', [AdminDoctorController::class, 'pdf'])->name('doctors.pdf');
+        Route::get('doctors/pending', [AdminDoctorController::class, 'pending'])->name('doctors.pending');
+        Route::get('doctors', [AdminDoctorController::class, 'index'])->name('doctors.index');
+        Route::get('doctors/{doctor}', [AdminDoctorController::class, 'show'])->name('doctors.show');
+        Route::patch('doctors/{doctor}/approve', [AdminDoctorController::class, 'approve'])->name('doctors.approve');
+        Route::patch('doctors/{doctor}/deny', [AdminDoctorController::class, 'deny'])->name('doctors.deny');
 
-//Reportes
-Route::get('/admin/reportes', [adminReporteController::class,'index']);
-Route::get('/admin/solicitudes', [adminReporteController::class,'solicitudes'])->name('solicitudes');
-Route::put('/admin/solicitudes/{id}', [DoctoresController::class, 'update'])->name('aprobar.update');
-Route::delete('/admin/solicitudes/{id}', [DoctoresController::class, 'destroy'])->name('eliminar.destroy');
+        Route::resource('patients', AdminPatientController::class);
+        Route::get('institutions/pdf', [AdminInstitutionController::class, 'pdf'])->name('institutions.pdf');
+        Route::resource('institutions', AdminInstitutionController::class);
+        Route::resource('medicines', AdminMedicineController::class);
+        Route::resource('appointments', AdminAppointmentController::class);
 
+        Route::get('reports', [AdminReportController::class, 'index'])->name('reports.index');
+        Route::get('reports/pdf', [AdminReportController::class, 'pdf'])->name('reports.pdf');
+    });
 
-//Doctores
+Route::prefix('doctor')
+    ->name('doctor.')
+    ->middleware(['auth', 'doctor'])
+    ->group(function () {
+        Route::get('/', [DoctorDashboardController::class, 'index'])->name('dashboard');
 
-//Auth para doctor
-/* 
-#Meter dentro de esta función las rutas junto con el dashboard de doctor
-#Aquí irán todas las rutas que hagan mención a la carpeta doctor-views
+        Route::get('patients', [DoctorPatientController::class, 'index'])->name('patients.index');
+        Route::get('patients/search', [DoctorPatientController::class, 'search'])->name('patients.search');
+        Route::post('patients/{patient}/attach', [DoctorPatientController::class, 'attach'])->name('patients.attach');
+        Route::delete('patients/{patient}', [DoctorPatientController::class, 'detach'])->name('patients.detach');
 
-#Solamente des comenten el Route ubicado justo abajo de este comentario
-*/
-
-
-// Usuario-paciente
-Route::resource('usuario', usuarioController::class);
-
-// API Usuario-paciente
-/*Route::apiResource('usuario', ApiController::class);
-Route::get('/api/usuarios', [ApiController::class, 'index']);
-Route::get('/api/usuarios/{id}', [ApiController::class, 'show']);
-Route::patch('/api/usuarios/{id}', [ApiController::class, 'update']);
-Route::post('/api/usuarios', [ApiController::class, 'store']);
-Route::delete('/api/usuarios/{id}', [ApiController::class, 'destroy']);
-*/
-// usuarios-paciente
-Route::put('admin/usuarios/editar/{id}', [UsuarioController::class, 'update']);
-
-Route::get('/admin/usuarios/crear', [usuarioController::class, 'create'])->name('usuarios.create');
-
-Route::get('/admin/usuarios/{id}', [usuarioController::class, 'show'])->name('usuarios.show');
-
-Route::get('/admin/usuarios/destroy/{id}', action: [usuarioController::class, 'destroy'])->name('usuarios.destroy');
-
-Route::delete('admin/usuarios/destroy/{id}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');
-
-Route::get('/admin/usuarios/editar/{id}', [usuarioController::class, 'edit'])->name('usuarios.edit');
-
-// Citas routes
-Route::resource('citas', CitaController::class);
-Route::apiResource('citas', ApiCitaController::class);
-
-// Reportes
-Route::resource('/reportes', reportesController::class);
-
-// Medicamentos
-Route::resource('medicamentos', MedicamentosController::class);
-Route::apiResource('medicamentos', ApiMedicamentosController::class);
-
-
-//Doctor Website :)
-/*
-Route::middleware(['auth', 'doctor'])->group(function () {
-    Route::get('/doctor', [DoctorController::class, 'index'])->name('doctor');
-});
-*/
-
-// Citas views for Doctor
-Route::middleware(['auth', 'doctor'])->group(function () {
-    // Remove: Route::resource('citas', CitaController::class); // Conflicts with custom routes
-
-    // Dashboard
-    Route::get('/doctor', [DoctorController::class, 'index'])->name('doctor');
-
-    // Citas Routes
-    Route::get('/doctor/citas', [CitaController::class, 'index'])->name('citas-doctor');
-    Route::get('/doctor/citas/crear', [CitaController::class, 'create'])->name('citas-doctor-create');
-    Route::post('/doctor/citas/crear', [CitaController::class, 'store'])->name('citas-doctor-store');
-    Route::get('/doctor/citas/visualizar/{id}', [CitaController::class, 'show'])->name('citas-doctor-view');
-    Route::get('/doctor/citas/editar/{id}', [CitaController::class, 'edit'])->name('citas-doctor-edit');
-    Route::patch('/doctor/citas/editar/{id}', [CitaController::class, 'update'])->name('citas-doctor-update');
-    Route::delete('/doctor/citas/{id}', [CitaController::class, 'destroy'])->name('citas-doctor-delete');
-});
-
-//contacto
-Route::post('/contacto', [ContactoController::class, 'store']);
+        Route::resource('appointments', DoctorAppointmentController::class);
+        Route::resource('medicines', DoctorMedicineController::class);
+        Route::resource('treatments', DoctorTreatmentController::class);
+    });
