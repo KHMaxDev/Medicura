@@ -1,128 +1,232 @@
+<div align="center">
+
+<img src="public/logo.png" alt="Logo de Medicura" width="130">
+
 # Medicura
 
-Plataforma de gestión médica construida con Laravel 11 y MySQL/MariaDB. Permite administrar doctores, pacientes, instituciones, medicamentos, citas y tratamientos, con paneles separados para administradores y doctores.
+### El cuidado, conectado.
 
-## Requisitos
+Una experiencia de gestión médica centrada en las personas.  
+Pacientes, equipo y atención en un mismo espacio.
 
-- PHP 8.2 o superior con `pdo_mysql`
-- Composer 2
-- MySQL 8 o MariaDB 10.4 o superior
-- XAMPP, Laragon o un servidor MySQL local equivalente
-- Node.js 20 o superior (solo si se compilan assets)
+**Portafolio · Demo interactiva · Glassmorphism · GSAP**
 
-## Base de datos local
+[La propuesta](#la-propuesta) · [Público](#para-quién-está-pensado) · [Experiencia](#dos-perspectivas-un-mismo-cuidado) · [Equipo](#equipo-de-desarrollo) · [Instalación](#explora-el-proyecto)
 
-Inicia MySQL desde el panel de control de XAMPP y crea la base de datos:
+</div>
 
-```powershell
-C:\xampp\mysql\bin\mysql.exe -u root -e "CREATE DATABASE IF NOT EXISTS medicura CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+---
+
+![Acceso a Medicura: selección de interfaz médica y administrativa](docs/images/acceso.png)
+
+## La propuesta
+
+**Medicura explora cómo simplificar la organización de la atención médica mediante una interfaz clara, cercana y conectada.** Su orientación combina gestión de información, coordinación de equipos y diseño de experiencia de usuario en el ámbito de la salud.
+
+El proyecto nació como una plataforma de gestión médica y evolucionó hacia una **demostración interactiva de portafolio**. Esta versión permite recorrer los flujos del producto, probar sus interacciones y conocer el trabajo de diseño y desarrollo detrás de cada pantalla.
+
+El objetivo de producto es reducir la fricción administrativa para que los profesionales puedan dedicar más atención a las personas. La demo muestra esa propuesta mediante escenarios ficticios; no constituye un sistema clínico en producción.
+
+## Para quién está pensado
+
+| Público | Necesidad | Experiencia propuesta |
+| :--- | :--- | :--- |
+| **Médicos y profesionales de la salud** | Consultar pacientes y organizar su jornada | Un espacio con agenda, pacientes asociados y seguimiento de tratamientos |
+| **Administradores de clínicas y centros médicos** | Coordinar personal, instituciones y actividad | Una visión general con gestión de registros, solicitudes e indicadores |
+| **Pacientes, como beneficiarios de la propuesta** | Recibir atención con mejor continuidad y organización | Información relacionada entre consultas, profesionales y tratamientos; esta versión no incluye un portal de pacientes |
+| **Reclutadores y colaboradores** | Evaluar decisiones de producto y capacidades técnicas | Flujos navegables, componentes reutilizables, diseño responsive y código verificable |
+
+## Qué problema aborda
+
+Cuando la agenda, los expedientes y la información del equipo se consultan por separado, organizar la atención exige más pasos y resulta difícil mantener una visión del conjunto. Medicura propone reunir esas tareas en una experiencia común.
+
+| Dificultad | Cómo la aborda Medicura |
+| :--- | :--- |
+| **Información dispersa** | Relaciona pacientes, médicos, citas y tratamientos en una misma interfaz |
+| **Conflictos de agenda** | Valida horarios y detecta solapamientos de médico o paciente en la demo |
+| **Seguimiento fragmentado** | Permite consultar el historial de citas y tratamientos de cada paciente |
+| **Poca visibilidad operativa** | Presenta indicadores, solicitudes pendientes y reportes desde el panel administrativo |
+| **Procesos difíciles de explorar** | Ofrece acciones claras, filtros, confirmaciones y mensajes de validación |
+
+Estas soluciones representan el comportamiento diseñado del prototipo. No se atribuyen resultados clínicos ni ahorros medidos a la demostración.
+
+## Dos perspectivas, un mismo cuidado
+
+<table>
+<tr>
+<th align="left">Espacio médico</th>
+<th align="left">Administración</th>
+</tr>
+<tr>
+<td valign="top">
+
+- Resumen y agenda del día.
+- Búsqueda y asociación de pacientes.
+- Creación, edición y consulta de citas.
+- Gestión de tratamientos y medicamentos.
+- Configuración con datos sensibles de solo lectura.
+- Actualización local de foto y simulación de contraseña.
+
+</td>
+<td valign="top">
+
+- Indicadores de la comunidad médica.
+- Consulta de doctores y revisión de solicitudes.
+- Gestión de pacientes e instituciones.
+- Organización de citas y medicamentos.
+- Reportes e impresión con opción de guardar PDF.
+- Reinicio del conjunto de datos de la demo.
+
+</td>
+</tr>
+</table>
+
+![Panel médico de Medicura con agenda, métricas y accesos rápidos](docs/images/panel-medico.png)
+
+### Un recorrido para conocerlo
+
+1. Entra desde la pantalla de acceso y elige **doctor** o **administrador**.
+2. Consulta la agenda y abre un paciente para explorar su información.
+3. Crea o edita una cita; prueba la validación de horarios.
+4. Cambia de interfaz y revisa las solicitudes o los reportes.
+5. Usa **Restablecer demo** para volver al punto de partida.
+
+## Diseño que acompaña
+
+La identidad visual utiliza superficies de **vidrio esmerilado**, fondos menta y azul y una jerarquía que da prioridad a las personas, la agenda y las acciones.
+
+- **Movimiento con propósito:** GSAP coordina entradas y transiciones de menú y diálogos.
+- **Lectura clara:** Manrope en títulos, DM Sans en texto e iconos SVG de Lucide.
+- **Adaptación responsive:** layouts para escritorio, tablet y móvil.
+- **Interacción accesible:** foco visible, etiquetas, navegación por teclado y respeto a la preferencia de movimiento reducido.
+- **Identidad propia:** logo original de Medicura y reconocimiento del equipo de desarrollo.
+
+Consulta las decisiones visuales en [el sistema de diseño](docs/design-system.md).
+
+## Equipo de desarrollo
+
+Los roles corresponden a la participación del equipo en el proyecto original.
+
+<table>
+<tr>
+<td align="center" width="33%"><img src="public/images/team/pedro.jpeg" alt="Pedro Dzul" width="100"><br><strong>Pedro Dzul</strong><br>Líder · Diseño móvil</td>
+<td align="center" width="33%"><img src="public/images/team/angel.jpeg" alt="Angel Uitzil" width="100"><br><strong>Angel Uitzil</strong><br>Diseño y desarrollo web</td>
+<td align="center" width="33%"><img src="public/images/team/steven.jpeg" alt="Steven Ku" width="100"><br><strong>Steven Ku</strong><br>Diseño y desarrollo web</td>
+</tr>
+<tr>
+<td align="center"><img src="public/images/team/madox.jpeg" alt="Madox Que" width="100"><br><strong>Madox Que</strong><br>Líder · Diseño y desarrollo web</td>
+<td align="center"><img src="public/images/team/ali.jpeg" alt="Ali Cob" width="100"><br><strong>Ali Cob</strong><br>Desarrollo y administración de BD</td>
+<td align="center"><img src="public/images/team/salva.jpeg" alt="Salvador Poot" width="100"><br><strong>Salvador Poot</strong><br>Diseño web</td>
+</tr>
+</table>
+
+## Cómo funciona esta versión
+
+| Capa | Tecnología y responsabilidad |
+| :--- | :--- |
+| Páginas y rutas | **Laravel 12 + Blade** sirven la interfaz y los arreglos iniciales |
+| Interactividad | **JavaScript** gestiona formularios, navegación, relaciones y validaciones |
+| Estado local | **sessionStorage** conserva los cambios durante la navegación en la misma pestaña |
+| Diseño y movimiento | **CSS + GSAP** definen superficies, adaptación y animaciones |
+| Compilación | **Vite** empaqueta estilos, scripts, fuentes e iconos locales |
+| Verificación | **PHPUnit, Node Test Runner y Playwright** cubren lógica y recorridos |
+
+```text
+Arreglos PHP → Controlador → Vista Blade → Interacciones en el navegador
+                                              ↕
+                                         sessionStorage
 ```
 
-La conexión local predeterminada es:
+**Alcance de la demo:** acceso libre, datos ficticios, sin base de datos ni envío de correos. El filtrado por médico organiza la experiencia; no representa autorización. El cambio de contraseña es una simulación y no almacena contraseñas. Los reportes utilizan el diálogo de impresión del navegador.
 
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=medicura
-DB_USERNAME=root
-DB_PASSWORD=
-```
+Los cambios locales pueden restablecerse y no se sincronizan entre dispositivos. Si el almacenamiento del navegador no está disponible, la interfaz lo informa. Se conserva PHP para servir las páginas: no es una exportación de HTML para hosting exclusivamente estático.
 
-## Instalación
-
-```bash
-composer install
-cp .env.example .env
-php artisan key:generate
-php artisan migrate:fresh --seed
-php artisan serve
-```
-
-La aplicación queda disponible en `http://localhost:8000`.
-
-## Credenciales de ejemplo
-
-| Perfil | Correo | Contraseña |
-| --- | --- | --- |
-| Administrador | `admin@medicura.local` | `Admin#2026` |
-| Administrador secundario | `admin2@medicura.local` | `Admin#2026` |
-| Doctor | `doctor@medicura.local` | `Doctor#2026` |
-| Paciente | `paciente@medicura.local` | `Paciente#2026` |
-| Cuidador | `cuidador@medicura.local` | `Cuidador#2026` |
-
-Los doctores adicionales usan `doctor02@medicura.local` hasta `doctor20@medicura.local` con la contraseña `Doctor#2026`. Los pacientes adicionales usan `paciente02@medicura.local` hasta `paciente20@medicura.local` con la contraseña `Paciente#2026`.
-
-Cambia estas contraseñas antes de exponer la aplicación fuera de tu equipo.
-
-## Datos sembrados
-
-El seeder crea:
-
-- 2 administradores
-- 20 doctores
-- 20 pacientes
-- 1 cuidador
-- 20 instituciones
-- 20 medicamentos
-- 40 relaciones doctor-paciente
-- 40 citas
-- 20 tratamientos
-
-## Rutas principales
-
-| Ruta | Descripción |
-| --- | --- |
-| `/` | Página pública y formulario de contacto |
-| `/login` | Inicio de sesión |
-| `/registro` | Registro de doctores (requiere aprobación) |
-| `/recuperar-contrasena` | Solicitud de enlace de recuperación |
-| `/admin` | Panel administrativo |
-| `/doctor` | Panel del doctor |
-| `/api/health` | Estado del servicio |
-
-Los paneles están protegidos por autenticación y middleware de rol. Los doctores solo pueden consultar y modificar la información de sus pacientes asignados.
-
-## Estructura
+<details>
+<summary><strong>Explorar la estructura técnica</strong></summary>
 
 ```text
 app/
-  Http/Controllers/Admin/      Controladores del panel administrativo
-  Http/Controllers/Doctor/     Controladores del panel del doctor
-  Http/Controllers/Auth/       Autenticación y recuperación de contraseña
-  Http/Requests/               Validación de formularios
-  Http/Middleware/             Control de acceso por rol
-  Models/                      Modelos Eloquent
-  Policies/                    Autorización por propietario
-  Services/                    Lógica de citas, pacientes, reportes y contraseñas
-database/
-  migrations/                  Esquema MySQL
-  seeders/                     Datos de ejemplo
-resources/views/
-  admin/                       Vistas del panel administrativo
-  doctor/                      Vistas del panel del doctor
-  auth/                        Login, registro y recuperación
-  layouts/                     Layouts y componentes compartidos
-  pdf/                         Plantillas de reportes PDF
+  Data/DemoData.php                 Arreglos iniciales de la demo
+  Http/Controllers/DemoController.php
+resources/
+  views/                           Inicio, acceso y contenedor de los paneles
+  js/app.js                        Pantallas e interacciones
+  js/demo-store.js                  Reglas, validaciones y relaciones
+  css/app.css                      Sistema visual responsive
+public/
+  logo.png                         Identidad original
+  images/team/                     Fotografías del equipo
+tests/
+  Feature/                         Pruebas de Laravel
+  js/                              Pruebas de lógica local
+  browser/                         Recorridos con Playwright
 ```
 
-Tablas principales: `users`, `institutions`, `medicines`, `appointments`, `treatments` y `doctor_patient`.
+La demo comienza con 6 doctores, 18 pacientes, 3 instituciones, 3 medicamentos ficticios, 18 citas y 4 tratamientos ficticios. Los datos relacionados comparten identificadores para mantener consistencia entre listados, detalles e indicadores.
 
-## Comandos útiles
+</details>
+
+## Explora el proyecto
+
+**Requisitos:** PHP 8.2+, Composer 2 y Node.js 20.19+ o 22.12+. No necesitas MySQL, migraciones, SMTP ni credenciales.
 
 ```bash
-php artisan migrate:fresh --seed
-php artisan db:seed
-php artisan route:list
-php artisan view:cache
-php artisan config:clear
-php artisan test
+composer install
 ```
 
-## Notas de seguridad
+Copia `.env.example` a `.env`. En PowerShell:
 
-- Las contraseñas se almacenan con `Hash::make`.
-- Los enlaces de recuperación son firmados y temporales.
-- Las solicitudes de doctores requieren aprobación administrativa.
-- No se envían contraseñas por correo.
-- Mantén `.env` fuera del control de versiones y rota cualquier credencial expuesta.
+```powershell
+Copy-Item .env.example .env
+```
+
+Prepara los assets e inicia la aplicación:
+
+```bash
+php artisan key:generate
+npm ci
+npm run build
+php artisan serve
+```
+
+Abre [la página principal](http://localhost:8000) o [el selector de interfaz](http://localhost:8000/login). Durante el desarrollo, `composer dev` inicia Laravel y Vite con recarga automática.
+
+<details>
+<summary><strong>Rutas y comandos de verificación</strong></summary>
+
+| Ruta | Contenido |
+| :--- | :--- |
+| `/` | Presentación, equipo de desarrollo y contacto simulado |
+| `/login` | Selección de interfaz |
+| `/doctor` | Panel médico |
+| `/doctor/settings` | Configuración del médico |
+| `/admin` | Panel administrativo |
+| `/api/health` | Estado de la aplicación |
+
+```bash
+npm run build
+npm test
+php artisan test
+npx playwright install chromium
+npm run test:e2e
+```
+
+Para usar Chrome ya instalado, en PowerShell:
+
+```powershell
+$env:PLAYWRIGHT_CHANNEL='chrome'
+npm run test:e2e
+```
+
+Las pruebas incluyen acceso público, rutas profundas, relaciones, validación de horarios, operaciones sobre registros, filtros, persistencia local, impresión, móvil y movimiento reducido. Playwright reutiliza el servidor del puerto 8000 o inicia uno para las pruebas.
+
+</details>
+
+---
+
+<div align="center">
+
+**Medicura · Tecnología que acerca.**  
+Un proyecto de portafolio sobre diseño, interacción y organización del cuidado.
+
+</div>
