@@ -118,6 +118,9 @@ Los roles corresponden a la participación del equipo en el proyecto original.
 <td align="center"><img src="public/images/team/ali.jpeg" alt="Ali Cob" width="100"><br><strong>Ali Cob</strong><br>Desarrollo y administración de BD</td>
 <td align="center"><img src="public/images/team/salva.jpeg" alt="Salvador Poot" width="100"><br><strong>Salvador Poot</strong><br>Diseño web</td>
 </tr>
+<tr>
+<td align="center" colspan="3"><img src="public/images/team/jose.jpeg" alt="Jose Luis Chavez Zetina" width="100"><br><strong>Jose Luis Chavez Zetina</strong><br>Desarrollador full stack</td>
+</tr>
 </table>
 
 ## Cómo funciona esta versión
